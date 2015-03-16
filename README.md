@@ -1,6 +1,6 @@
 # Trabajo Fin de Grado
 
-## Compilación del cliente
+## Construcción del cliente
 
 ```
 sudo npm install -g wapp

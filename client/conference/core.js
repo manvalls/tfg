@@ -26,7 +26,7 @@ walk(function*(){
       wave = ctx.createPeriodicWave(real,imag),
       gain1 = ctx.createGain(),
       gain2 = ctx.createGain(),
-      src,dest,a;
+      src,dest;
   
   try{ src = ctx.createMediaStreamSource(yield stream); }
   catch(e){ return; }
@@ -62,10 +62,6 @@ walk(function*(){
   osc2.start(0);
   
   outStream = dest.stream;
-  
-  a = new Audio();
-  a.src = URL.createObjectURL(outStream);
-  a.play();
 });
 
 function onMsg(msg,en,peer){
