@@ -1,0 +1,36 @@
+{
+  "name": "manvalls-tfg",
+  "version": "0.0.0",
+  "description": "Trabajo Fin de Grado",
+  "main": "main.js",
+  "bin": "./bin/runner.sh",
+  
+  "dependencies": {
+    "wapp": "",
+    "iku-hub": "",
+    "y-walk": "",
+    "u-help": "",
+    "forever": ""
+  },
+  
+  "devDependencies": {
+    "u-elem": "",
+    "u-css": "",
+    "u-proto": "",
+    
+    "y-callback": "",
+    "y-resolver": "",
+    "y-emitter": "",
+    "y-timers": ""
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/manvalls/tfg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manvalls/tfg/issues"
+  },
+  "author": "Manuel Valls Fernández <manolo@vlrz.es>",
+  "license": "LGPL-3.0"
+}
