@@ -7,6 +7,8 @@
   "dependencies": {
     "wapp": "",
     "iku-hub": "",
+    "i-peer": "",
+    "i-pm": "",
     "y-walk": "",
     "u-help": "",
     "forever": ""

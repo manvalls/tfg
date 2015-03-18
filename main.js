@@ -1,6 +1,7 @@
 var Wapp = require('wapp'),
-    Server = require('iku-hub/server/ws'),
-    Room = require('iku-hub/server').Room,
+    WsPm = require('i-pm/ws'),
+    Server = require('iku-hub/server'),
+    Room = Server.Room,
     wrap = require('y-walk').wrap;
 
 function onReq(req){
@@ -36,7 +37,7 @@ module.exports = wrap(function*(server,path){
   
   app = yield Wapp(__dirname + '/client',server,path),
   hp = path + '.hub',
-  hub = new Server(server,hp),
+  hub = new Server(WsPm(server,hp)),
   rooms = {};
   
   app.on('request',onReq);

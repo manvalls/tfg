@@ -6,13 +6,16 @@ var help = require('u-help'),
 i = process.argv.indexOf('--help');
 
 if(i != -1){
-  return process.stdout.write(help('manvalls-tfg [<opciones>]',{
+  
+  help.show('manvalls-tfg [<opciones>]',{
     Opciones: {
       '-p <puerto>':  'Puerto en el que el servidor escuchará, por defecto 8080',
       '--forever':    'Lanzar el servidor usando forever',
       '-n':           'Imprime el nombre del script a ejecutar por `forever` y finaliza'
     }
-  }));
+  });
+  
+  return;
 }
 
 i = process.argv.indexOf('-n');

@@ -1,5 +1,6 @@
 var Emitter = require('y-emitter'),
-    Hub = require('iku-hub/client/ws'),
+    Hub = require('iku-hub/client'),
+    Wsp = require('i-peer/ws'),
     Su = require('u-su'),
     elem = require('u-elem'),
     walk = require('y-walk'),
@@ -144,7 +145,7 @@ function onceClosed(e,en,core){
 }
 
 Core = module.exports = function Core(name){
-  var h = new Hub('.hub');
+  var h = new Hub(Wsp('.hub'));
   
   Emitter.Target.call(this,emitter);
   h.once('closed',onceClosed,this);
