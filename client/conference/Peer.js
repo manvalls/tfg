@@ -29,6 +29,8 @@ var elem = require('u-elem'),
     }),
     
     colors = require('./colors.js'),
+    font = require('../font.js'),
+    ctx = require('./context.js'),
     
     Peer;
 
@@ -37,7 +39,7 @@ function onRangeInput(e,cbc,audio){
 }
 
 Peer = module.exports = function Peer(audio){
-  var range,i;
+  var range,i,markers;
   
   this.container = elem(['div',{className: contClass}]);
   
@@ -70,6 +72,64 @@ Peer = module.exports = function Peer(audio){
   
   this.container.appendChild(this[fft].container);
   
+  markers = elem(['div',{style: {fontFamily: font, position: 'relative'}}]);
+  this.container.appendChild(markers);
+  
+  elem([markers,['span',
+    '0',
+    {style: {
+      position: 'absolute',
+      top: '0%',
+      left: '0%'
+    }}],
+    ['div',{style: {
+      backgroundColor: 'black',
+      width: '1px',
+      height: '6px',
+      position: 'absolute',
+      top: '-2px',
+      left: '2px'
+    }}]
+  ]);
+  
+  elem([markers,['span',
+    Math.round(ctx.sampleRate * 10 / 1000 / 4 / 2) / 10,
+    {style: {
+      position: 'absolute',
+      width: '30px',
+      textAlign: 'center',
+      top: '0%',
+      left: (width + 4) / 2 - 15 + 'px'
+    }}],
+    ['div',{style: {
+      backgroundColor: 'black',
+      width: '1px',
+      height: '6px',
+      position: 'absolute',
+      top: '-2px',
+      left: '50%'
+    }}]
+  ]);
+  
+  elem([markers,['span',
+    Math.round(ctx.sampleRate * 10 / 1000 / 4) / 10,
+    {style: {
+      position: 'absolute',
+      top: '0%',
+      right: '0%'
+    }}],
+    ['div',{style: {
+      backgroundColor: 'black',
+      width: '1px',
+      height: '6px',
+      position: 'absolute',
+      top: '-2px',
+      right: '2px'
+    }}]
+  ]);
+  
+  elem([this.container,['br'],['div','kHz',{style: {fontFamily: font, textAlign: 'center'}}]]);
+  
   if(audio){
     
     range = elem(['input',{
@@ -80,7 +140,11 @@ Peer = module.exports = function Peer(audio){
       step: 0.01
     }]);
     
-    this.container.appendChild(range);
+    elem([this.container,['div','Volumen:',{style: {
+      textAlign: 'center',
+      fontFamily: font,
+      marginTop: '2px'
+    }}],range]);
     
     range.value = audio.volume;
     range[on]('input',onRangeInput,audio);

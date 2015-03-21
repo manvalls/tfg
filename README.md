@@ -1,12 +1,8 @@
 # Trabajo Fin de Grado
 
-## Construcción del cliente
+## Memoria
 
-```
-sudo npm install -g wapp
-cd tfg
-wapp build client
-```
+Ver [memoria/memoria.md](memoria/memoria.md "Memoria del tfg")
 
 ## Ejecución del servidor
 
@@ -15,6 +11,11 @@ sudo npm install -g manvalls-tfg
 manvalls-tfg -p 8080
 ```
 
-## Memoria
+## Construcción del cliente
 
-Ver [memoria/memoria.md](memoria/memoria.md "Memoria del tfg")
+```
+sudo npm install -g wapp
+cd tfg
+wapp build client
+```
+

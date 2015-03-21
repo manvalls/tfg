@@ -114,7 +114,7 @@ peerCont = elem(['div',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     
-    margin: '50px'
+    margin: '30px'
   }}
 ]);
 
@@ -127,7 +127,7 @@ dist = elem(['input',{
   min: 0,
   max: 1,
   step: 0.001,
-  width: '200px'
+  style: {width: '120px'}
 }]);
 
 localStorage.distortion = localStorage.distortion || 0;
@@ -137,7 +137,14 @@ dist[on]('input',function(){
   Core.setDistortion(parseFloat(localStorage.distortion = dist.value));
 });
 
-elem([conf,['div','Distorsión:',{style: {fontFamily: font,fontSize: 'large',margin: '3px'}}],dist]);
+elem([conf,['div','Efecto Wally:',{style: {fontFamily: font,fontSize: 'large',margin: '3px'}}],dist,
+  ['div',{style: {width: '120px',position: 'relative',fontFamily: font}},
+    ['span','0',{style: {position: 'absolute',left: '0px'}}],
+    ['span','200',{style: {position: 'absolute',right: '0px'}}]
+  ],
+  ['div',{style: {width: '120px',fontFamily: font,textAlign: 'center'}},'Hz']
+]);
+
 
 // API
 

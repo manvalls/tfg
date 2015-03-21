@@ -8,7 +8,7 @@ var Emitter = require('y-emitter'),
     wait = require('y-timers/wait'),
     
     stream = require('./stream.js'),
-    ctx = new AudioContext(),
+    ctx = require('./context.js'),
     
     emitter = Su(),
     room = Su(),
@@ -17,6 +17,8 @@ var Emitter = require('y-emitter'),
     hub = Su(),
     color = Su(),
     cbc = Su(),
+    
+    hearMyself = false,
     
     osc1,osc2,
     Core,outStream,analyser;
@@ -27,7 +29,7 @@ walk(function*(){
       wave = ctx.createPeriodicWave(real,imag),
       gain1 = ctx.createGain(),
       gain2 = ctx.createGain(),
-      src,dest;
+      src,dest,audio,f1,f2;
   
   try{ src = ctx.createMediaStreamSource(yield stream); }
   catch(e){ return; }
@@ -50,8 +52,18 @@ walk(function*(){
   osc2.connect(gain1.gain);
   gain1.connect(gain2.gain);
   
-  src.connect(gain2);
-  gain2.connect(analyser);
+  f2 = ctx.createBiquadFilter();
+  f2.type = 'lowpass';
+  f2.frequency.value = ctx.sampleRate / 4;
+  
+  f1 = ctx.createBiquadFilter();
+  f1.type = 'lowpass';
+  f1.frequency.value = ctx.sampleRate / 4;
+  
+  src.connect(f1);
+  f1.connect(gain2);
+  gain2.connect(f2);
+  f2.connect(analyser);
   
   dest = ctx.createMediaStreamDestination();
   analyser.connect(dest);
@@ -63,6 +75,13 @@ walk(function*(){
   osc2.start(0);
   
   outStream = dest.stream;
+  
+  if(hearMyself){
+    audio = new Audio();
+    audio.src = URL.createObjectURL(outStream);
+    audio.play();
+  }
+  
 });
 
 function onMsg(msg,en,peer){
