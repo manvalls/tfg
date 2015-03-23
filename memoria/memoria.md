@@ -95,7 +95,15 @@ Debemos evitar pensar en JavaScript como un lenguaje concurrente: cada script se
 
 Con la introducción de ECMAScript 6 a lo anterior hay que añadir que, dentro de una función generadora, solo se puede romper la ejecución al alcanzar la palabra clave `yield`. Así, a pesar de tener la ilusión de estar trabajando con un código síncrono, la ejecución es efectivamente asíncrona, dejando tiempo al navegador para ocuparse de otras tareas.
 
+### HTTP/1.1
+
+Ya tenemos el lenguaje de marcado, los estilos y el lenguaje de programación, solo resta establecer el protocolo de transporte. HTTP y su modelo petición - respuesta, cimentado sobre TCP, aparece como el protocolo ideal para la transmisión fiable de los datos que componen el código de nuestra aplicación web: texto.
+
+A pesar de la aparición de nuevas variantes como SPDY o HTTP/2, el conjunto de métodos y la sintáxis del mensaje se mantiene invariante desde HTTP/1.1, con las nuevas mejoras centrándose en los métodos de transporte del mensaje. Esto nos permite trabajar sobre HTTP/1.1 sin renunciar a los avances introducidos en SPDY y HTTP/2, ya que una simple actualización de la librería subyacente basta para aprovechar prácticamente al máximo estas nuevas versiones.
+
 ### WebSockets
+
+
 
 ### WebRTC 1.0
 
