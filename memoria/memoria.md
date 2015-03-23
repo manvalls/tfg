@@ -99,9 +99,11 @@ Con la introducción de ECMAScript 6 a lo anterior hay que añadir que, dentro d
 
 Ya tenemos el lenguaje de marcado, los estilos y el lenguaje de programación, solo resta establecer el protocolo de transporte. HTTP y su modelo petición - respuesta, cimentado sobre TCP, aparece como el protocolo ideal para la transmisión fiable de los datos que componen el código de nuestra aplicación web: texto.
 
-A pesar de la aparición de nuevas variantes como SPDY o HTTP/2, el conjunto de métodos y la sintáxis del mensaje se mantiene invariante desde HTTP/1.1, con las nuevas mejoras centrándose en los métodos de transporte del mensaje. Esto nos permite trabajar sobre HTTP/1.1 sin renunciar a los avances introducidos en SPDY y HTTP/2, ya que una simple actualización de la librería subyacente basta para aprovechar prácticamente al máximo estas nuevas versiones.
+Aunque existen nuevas versiones como SPDY o HTTP/2, el conjunto de métodos y la sintáxis del mensaje se mantienen invariantes desde HTTP/1.1, con las nuevas mejoras centrándose en los métodos de transporte. Esto nos permite trabajar sobre HTTP/1.1 sin renunciar a los avances introducidos en SPDY y HTTP/2, ya que una simple actualización de la librería subyacente basta para aprovechar prácticamente al máximo estas nuevas versiones.
 
 ### WebSockets
+
+A pesar de la idoneidad de HTTP para transmitir el código de una aplicación web, presenta una clara limitación: el modelo petición - respuesta exige que la comunicación sea iniciada por el cliente. En muchas aplicaciones es deseable que el servidor sea capaz de enviar mensajes al cliente sin que éste los haya solicitado, mensajes a los que el cliente pueda reaccionar y actuar en consecuencia.
 
 
 
