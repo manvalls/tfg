@@ -101,19 +101,21 @@ Ya tenemos el lenguaje de marcado, los estilos y el lenguaje de programación, s
 
 Aunque existen nuevas versiones como SPDY o HTTP/2, el conjunto de métodos y la sintáxis del mensaje se mantienen invariantes desde HTTP/1.1, con las nuevas mejoras centrándose en los métodos de transporte. Esto nos permite trabajar sobre HTTP/1.1 sin renunciar a los avances introducidos en SPDY y HTTP/2, ya que una simple actualización de la librería subyacente basta para aprovechar prácticamente al máximo estas nuevas versiones.
 
-### WebSockets
+### WebSocket
 
 A pesar de la idoneidad de HTTP para transmitir el código de una aplicación web, presenta una clara limitación: el modelo petición - respuesta exige que la comunicación sea iniciada por el cliente. En muchas aplicaciones es deseable que el servidor sea capaz de enviar mensajes al cliente sin que éste los haya solicitado, mensajes a los que el cliente pueda reaccionar y actuar en consecuencia.
 
+El modelo de seguridad presente en las aplicaciones web impide el manejo directo de conexiones TCP o UDP, limitándose a trabajar con conexiones HTTP. Para poder dar el salto a un protocolo más conveniente, en HTTP/1.1 se introduce la cabecera `upgrade`, una forma de indicar al servidor HTTP que se desea cambiar de protocolo reusando la misma conexión TCP.
 
+Aprovechando el camino abierto gracias a esta cabecera, el IETF estandarizó en 2011 el protocolo WebSocket, dotando a las aplicaciones web de un canal de comunicación con las características de una conexión TCP, añadiendo el concepto de *mensajes* y permitiendo así una comunicación *full-duplex* más allá del modelo petición - respuesta.
 
 ### WebRTC 1.0
 
 ### Web Audio API
 
-### node.js
-
 ### Soporte en navegadores
+
+### node.js
 
 ## Desarrollo
 
