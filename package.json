@@ -1,6 +1,6 @@
 {
   "name": "manvalls-tfg",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Trabajo Fin de Grado",
   "main": "main.js",
   "bin": "./bin/runner.sh",
