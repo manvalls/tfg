@@ -111,6 +111,10 @@ Aprovechando el camino abierto gracias a esta cabecera, el IETF estandarizó en 
 
 ### WebRTC 1.0
 
+Con las tecnologías descritas hasta el momento sólo es posible comunicarse de forma directa con un servidor, motivo por el cual durante muchos años las comunicaciones entre usuarios se realizaban de forma indirecta, usando el servidor como intermediario.
+
+![Servidor como intermediario](images/webrtc/relay.png)
+
 ### Web Audio API
 
 ### Soporte en navegadores
