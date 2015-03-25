@@ -131,6 +131,14 @@ Con este fin, es necesaria la intervención de servidores auxiliares que determi
 
 Como se aprecia, el usuario solicita al servidor ICE el envío de un candidato que contenga la información relevante: direcciones IP, puertos disponibles, etc. Una vez obtenido el candidato, éste se envía fuera de banda al otro usuario. El circuito se completa cuando ambos usuarios toman posesión de los candidatos correspondientes, pudiendo así determinar el camino a seguir para establecer una conexión.
 
+Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿Intercambio de datos binarios? ¿Transmisión y recepción de audio y video? ¿Con qué codecs? ¿Cuánto ancho de banda se usará? Para que ambos usuarios conozcan las respuestas a esas preguntas es para lo que se utiliza el protocolo SDP.
+
+Uno de los usuarios, el que inicia la conexión, elabora una oferta con las características de los canales de datos y flujos de audio y video que desea establecer, con información como los códecs disponibles y las restricciones de ancho de banda a imponer. Dicha oferta se envía fuera de banda - recordemos que aún no se ha establecido la conexión - al otro usuario, el cual, en base a los códecs y demás funciones de las que dispone, elabora su respuesta, incorporando en ella información relevante a sus propios flujos de datos o audio y video.
+
+![Intercambio SDP](images/webrtc/SDP.png)
+
+Una vez que el intercambio oferta - respuesta se ha completado y, por medio de los candidatos ICE, se ha encontrado el camino adecuado para la conexión, ésta queda correctamente establecida, permitiendo el envío de datos punto a punto, desde navegadores web, sin usar un servidor como intermediario: tecnología P2P a una URL de distancia.
+
 ### Web Audio API
 
 ### Soporte en navegadores
