@@ -111,9 +111,23 @@ Aprovechando el camino abierto gracias a esta cabecera, el IETF estandarizó en 
 
 ### WebRTC 1.0
 
-Con las tecnologías descritas hasta el momento sólo es posible comunicarse de forma directa con un servidor, motivo por el cual durante muchos años las comunicaciones entre usuarios se realizaban de forma indirecta, usando el servidor como intermediario.
+Con las tecnologías descritas hasta el momento sólo es posible comunicarse de forma directa con un servidor, motivo por el cual durante años las comunicaciones entre usuarios se realizaban de forma indirecta, usando el servidor como intermediario.
 
 ![Servidor como intermediario](images/webrtc/relay.png)
+
+Resulta evidente lo ineficiente de esta técnica: la latencia, el tiempo que tarda en llegar un mensaje de un usuario a otro, se multiplica por dos, primero de un usuario al servidor, y luego del servidor al otro usuario. Era solo cuestión de tiempo que aparecieran las APIs y teconologías adecuadas para posibilitar la comunicación usuario a usuario, P2P, dentro del entorno de una aplicación web.
+
+WebRTC, hecho público por Google en 2011, lleva en proceso de estandarización desde entonces, con diversos borradores disponibles y en constante cambio en la página del W3C. A pesar de tratarse de una API inestable los navegadores más modernos incorporan soporte para esta tecnología desde hace ya varios años, permitiendo así la creación de aplicaciones web que hagan uso de tecnología P2P sin necesidad de plugins, algo que cobra especial importancia en los dispositivos móviles.
+
+WebRTC 1.0, la versión en la que se basan las implementaciones actuales, está cimentada en dos protocolos fundamentales: ICE y SDP. Haciendo uso de estos dos protocolos se construyen conexiones en tiempo real entre usuarios, entre navegadores, sin imponer un protocolo de transporte concreto y abriendo así las puertas al uso de soluciones basadas en UDP, algo anteriormente impensable en el mundo de las aplicaciones web sin el uso de plugins.
+
+Puesto estos protocolos han de usarse para establecer la conexión, los mensajes tanto ICE como SDP se transmiten *fuera de banda*, usando los métodos que a cada desarrollador le parezcan oportunos. Esto típicamente implica transmitirlos de forma indirecta a través de un servidor mediante WebSocket o HTTP.
+
+Dicho esto, es necesario diferenciar de forma clara las funciones de ambos protocolos, pues ambos responden a necesidades diferentes. La primera condición evidente a satisfacer viene dada por la necesidad de los *peers* de conocer el camino lógico a seguir para llegar del uno al otro a través de la red, sorteando firewalls y técnicas NAT.
+
+Con este fin, es necesaria la intervención de servidores auxiliares que determinen aspectos tan importantes como la dirección pública de una red que se encuentre tras uno o varios niveles NAT o los puertos que determinado firewall permite usar, ya que esta información no está al alcance directo del propio *peer*. Así, el flujo de candidatos ICE vendría dado por la siguiente figura:
+
+![Flujo ICE](images/webrtc/ICE.png)
 
 ### Web Audio API
 
