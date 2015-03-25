@@ -159,6 +159,7 @@ function* setReady(hub,core,name){
 }
 
 function onceClosed(e,en,core){
+  core[peer].set('closed');
   core[emitter].unset('ready');
   core[emitter].set('closed');
 }
