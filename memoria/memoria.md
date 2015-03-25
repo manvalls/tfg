@@ -131,7 +131,7 @@ Con este fin, es necesaria la intervención de servidores auxiliares que determi
 
 Como se aprecia, el usuario solicita al servidor ICE el envío de un candidato que contenga la información relevante: direcciones IP, puertos disponibles, etc. Una vez obtenido el candidato, éste se envía fuera de banda al otro usuario. El circuito se completa cuando ambos usuarios toman posesión de los candidatos correspondientes, pudiendo así determinar el camino a seguir para establecer una conexión.
 
-Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿Intercambio de datos binarios? ¿Transmisión y recepción de audio y video? ¿Con qué codecs? ¿Cuánto ancho de banda se usará? Para que ambos usuarios conozcan las respuestas a esas preguntas es para lo que se utiliza el protocolo SDP.
+Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿Intercambio de datos binarios? ¿Transmisión y recepción de audio y video? ¿Con qué codecs? ¿Cuánto ancho de banda se usará? Con el fin de que ambos usuarios conozcan las respuestas a esas preguntas se utiliza el protocolo SDP.
 
 Uno de los usuarios, el que inicia la conexión, elabora una oferta con las características de los canales de datos y flujos de audio y video que desea establecer, con información como los códecs disponibles y las restricciones de ancho de banda a imponer. Dicha oferta se envía fuera de banda - recordemos que aún no se ha establecido la conexión - al otro usuario, el cual, en base a los códecs y demás funciones de las que dispone, elabora su respuesta, incorporando en ella información relevante a sus propios flujos de datos o audio y video.
 
@@ -140,6 +140,42 @@ Uno de los usuarios, el que inicia la conexión, elabora una oferta con las cara
 Una vez que el intercambio oferta - respuesta se ha completado y, por medio de los candidatos ICE, se ha encontrado el camino adecuado para la conexión, ésta queda correctamente establecida, permitiendo el envío de datos punto a punto, desde navegadores web, sin usar un servidor como intermediario: tecnología P2P a una URL de distancia.
 
 ### Web Audio API
+
+A lo largo del grado no solo se nos ha enseñado a transmitir audio, también hemos aprendido a modularlo, a filtrarlo, en definitiva, a procesarlo. Ya en 2010 Mozilla implementó en su navegador una API a la que denominó Audio Data API, con un modelo similar al de la API que el W3C empezaría a estandarizar en 2013 bajo el nombre de Web Audio API.
+
+La Web Audio API está basada en diagramas de bloques de los cuales se encarga el navegador a bajo nivel, los algoritmos que rigen su funcionamiento suelen estar implementados en ensamblador optimizado, aunque no es mandatorio. Además de estos bloques la especificación permite trabajar directamente con las muestras de audio mediante *Audio Workers*, esto es, instancias separadas del interpretador de JavaScript que se dedican a ejecutar un script determinado destinado a manipular en tiempo real dichas muestras.
+
+Dicho esto, podemos distinguir tres tipos de bloques: fuentes (solo salida), sumideros (solo entrada) y bloques de procesado (una o varias entradas y salidas). Los bloques, además de entradas y salidas, tienen *atributos*: frecuencia, ganancia, etc. Las salidas pueden conectarse tanto a entradas como a atributos. A modo de ejemplo, en el siguiente script se obtiene un seno cuadrático a partir de dos osciladores y se reproduce:
+
+```javascript
+var ctx = new AudioContext(),
+    
+    osc1 = ctx.createOscillator(),
+    osc2 = ctx.createOscillator(),
+    
+    amp = ctx.createGain();
+
+// Valores inciales
+
+amp.gain.value = 0;
+osc1.frequency.value = osc2.frequency.value = 200;
+
+// Conexiones
+
+osc1.connect(amp);
+osc2.connect(amp.gain);
+
+amp.connect(ctx.destination);
+
+// Arranque
+
+osc1.start();
+osc2.start();
+```
+
+El diagrama de bloques correspondiente sería el siguiente:
+
+![Ejemplo WebAudio](images/web-audio.png)
 
 ### Soporte en navegadores
 
