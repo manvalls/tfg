@@ -129,6 +129,8 @@ Con este fin, es necesaria la intervención de servidores auxiliares que determi
 
 ![Flujo ICE](images/webrtc/ICE.png)
 
+Como se aprecia, el usuario solicita al servidor ICE el envío de un candidato que contenga la información relevante: direcciones IP, puertos disponibles, etc. Una vez obtenido el candidato, éste se envía fuera de banda al otro usuario. El circuito se completa cuando ambos usuarios toman posesión de los candidatos correspondientes, pudiendo así determinar el camino a seguir para establecer una conexión.
+
 ### Web Audio API
 
 ### Soporte en navegadores
