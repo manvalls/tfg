@@ -189,7 +189,15 @@ Mozilla Firefox, por contrapartida, es capaz de procesar audio recibido a travé
 
 ![Bug Firefox](images/bug-firefox.png)
 
-### node.js
+### Node.js
+
+Hasta ahora nos hemos centrado en tecnologías y estándares, toca hablar de software específico para servidores. Ya en 1994 Netscape ofreció herramientas que permitían la ejecución de JavaScript en servidores, sin embargo no fue hasta 2009 cuando, impulsado por el notable aumento de prestaciones de los modernos motores de JavaScript, Ryan Dahl creó Node.js. Desde entonces este proyecto basado en el motor de JavaScript de Google Chrome, V8, no ha hecho más que crecer, impulsando un nuevo modelo de servidores especialmente adecuados para aplicaciones en tiempo real.
+
+Como ya se puso de manifiesto, los programas escritos en JavaScript se ejecutan en una sola hebra y con frecuencia adoptan un modelo asíncrono. Este modelo es una de las claves del éxito de Node.js, puesto que en un servidor las operaciones más lentas son las que implican esperar: esperar al disco duro, esperar a la base de datos, esperar a que lleguen mensajes a través de la red... Los servidores pasan la mayor parte del tiempo esperando.
+
+Soluciones síncronas como PHP solventan este problema lanzando una hebra para cada petición web, con el consecuente consumo de recursos, para luego mantener esa hebra en espera de que se completen las operaciones de entrada y salida. Pero en JavaScript no existe ese problema, ya se vio como para esperar 1000ms y realizar alguna acción no es necesario bloquear la ejecución del programa gracias a su naturaleza asíncrona.
+
+Como resultado de este cambio de paradigma se obtienen mejoras sustanciales en capacidad de usuarios y tiempo de respuesta, además de código reusable al compartir el mismo lenguaje de programación tanto en el cliente como en el servidor. En los últimos años se ha producido un aumento expectacular de la popularidad de Node.js, creando un ecosistema extenso y variado de librerías y recursos a través de su gestor de paquetes oficial, npm (*node package manager*).
 
 ## Desarrollo
 
