@@ -133,7 +133,7 @@ Como se aprecia, el usuario solicita al servidor ICE el envío de un candidato q
 
 Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿Intercambio de datos binarios? ¿Transmisión y recepción de audio y video? ¿Con qué codecs? ¿Cuánto ancho de banda se usará? Con el fin de que ambos usuarios conozcan las respuestas a esas preguntas se utiliza el protocolo SDP.
 
-Uno de los usuarios, el que inicia la conexión, elabora una oferta con las características de los canales de datos y flujos de audio y video que desea establecer, con información como los códecs disponibles y las restricciones de ancho de banda a imponer. Dicha oferta se envía fuera de banda - recordemos que aún no se ha establecido la conexión - al otro usuario, el cual, en base a los códecs y demás funciones de las que dispone, elabora su respuesta, incorporando en ella información relevante a sus propios flujos de datos o audio y video.
+Uno de los usuarios, el que inicia la conexión, elabora una oferta con las características de los canales de datos y flujos de audio y video que desea establecer, con información como los códecs disponibles y las restricciones de ancho de banda a imponer. Dicha oferta se envía fuera de banda - recordemos que aún no se ha establecido la conexión - al otro usuario, el cual, en base a los códecs y demás funciones de las que dispone, elabora su respuesta, incorporando en ella la información relevante de sus propios flujos de datos o audio y video, si los hubiera.
 
 ![Intercambio SDP](images/webrtc/SDP.png)
 
@@ -180,6 +180,14 @@ El diagrama de bloques correspondiente sería el siguiente:
 Puesto que la Web Audio API no implementa el bloque multiplicador, hemos de construirlo nosotros usando un amplificador con ganancia controlada por amplitud, la de la otra señal a multiplicar. El código de ejemplo suministrado hace sonar por la salida de audio un seno cuadrático obtenido de dos senos a frecuencia 200Hz, con lo que la señal obtenida tendrá cierto nivel de contínua y una frecuencia de 400Hz.
 
 ### Soporte en navegadores
+
+Google Chrome, y en especial Mozilla Firefox, realizan un soberbio trabajo implementando las tecnologías más modernas incluso cuando su estandarización aún no ha sido completada, por lo que éstos y sus derivados contienen soporte en sus versiones estables tanto para WebRTC 1.0 como para la Web Audio API, sin fallos importantes de funcionamiento cuando ambas tecnologías trabajan por separado.
+
+Los fallos aparecen al combinar ambas tecnologías. En el momento de este escrito, Google Chrome permite transmitir audio procesado, pero es incapaz de procesar audio recibido mediante WebRTC (véase el bug 121673 de Chromium). Según informan miembros del proyecto, arreglar este fallo implicaría un cuatrimestre de trabajo, y aún no han empezado a plantear una posible solución, por lo que a efectos de este escrito este fallo se considerará permanente.
+
+Mozilla Firefox, por contrapartida, es capaz de procesar audio recibido a través de WebRTC sin problemas, pero la versión estable a fecha de escritura, Firefox 36, presenta fallos en el envío de audio procesado (véase el bug 1081819 de Mozilla). En la página del bug se me confirmó que estaría arreglado en la versión Nightly del momento, y en efecto el fallo se corrigió en la versión 39, cuyo paso a estable está previsto para Junio de este año.
+
+![Bug Firefox](images/bug-firefox.png)
 
 ### node.js
 
