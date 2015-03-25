@@ -175,7 +175,9 @@ osc2.start();
 
 El diagrama de bloques correspondiente sería el siguiente:
 
-![Ejemplo WebAudio](images/web-audio.png)
+![Ejemplo Web Audio](images/web-audio.png)
+
+Puesto que la Web Audio API no implementa el bloque multiplicador, hemos de construirlo nosotros usando un amplificador con ganancia controlada por amplitud, la de la otra señal a multiplicar. El código de ejemplo suministrado hace sonar por la salida de audio un seno cuadrático obtenido de dos senos a frecuencia 200Hz, con lo que la señal obtenida tendrá cierto nivel de contínua y una frecuencia de 400Hz.
 
 ### Soporte en navegadores
 
