@@ -4,7 +4,7 @@ var Font = require('u-css/font'),
 module.exports = font = new Font();
 
 font.add({
-  url: '~files/font.woff',
+  url: '.files/font.woff',
   style: 'normal',
   weight: '400'
 });

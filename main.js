@@ -31,7 +31,7 @@ function cleanRoom(e,en,rooms,name){
 module.exports = wrap(function*(server,path){
   var app,hp,hub,rooms;
   
-  app = yield Wapp(__dirname + '/client',server,path),
+  app = new Wapp(__dirname + '/client',server,path),
   hp = (path || '') + '/.hub',
   hub = new Server(WsPm(server,hp)),
   rooms = {};
