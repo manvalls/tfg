@@ -1,6 +1,4 @@
 var wapp = require('wapp/client'),
-
-    on = require('u-proto/on'),
     apply = require('u-proto/apply'),
     
     frontPage = require('./front-page.js'),
@@ -15,7 +13,7 @@ document.body.style[apply]({
   height: window.innerHeight + 'px'
 });
 
-window[on]('resize',function(){
+window.addEventListener('resize',function(){
   
   document.body.style[apply]({
     width: window.innerWidth + 'px',
@@ -27,16 +25,15 @@ window[on]('resize',function(){
 document.body.appendChild(frontPage);
 document.body.appendChild(conference);
 
-wapp.on('rsc',function(e){
-  
-  if(e.rsc == ''){
-    frontPage.active = true;
-    conference.active = false;
-  }else{
-    frontPage.active = false;
-    conference.active = true;
-    conference.name = e.rsc;
-  }
-  
+wapp.on('top rsc',function(e){
+  frontPage.active = true;
+  conference.active = false;
 });
 
+wapp.on('rsc',function(e){
+  frontPage.active = false;
+  conference.active = true;
+  conference.name = e.rsc;
+});
+
+wapp.start();
