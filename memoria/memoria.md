@@ -203,6 +203,8 @@ Como resultado de este cambio de paradigma se obtienen mejoras sustanciales en c
 
 ### Esquema de funcionamiento
 
+![Esquema general](images/esquema.png)
+
 ### Arquitectura de la aplicación
 
 #### Librerías vertebrales
