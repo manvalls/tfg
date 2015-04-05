@@ -137,7 +137,7 @@ dist[on]('input',function(){
   Core.setDistortion(parseFloat(localStorage.distortion = dist.value));
 });
 
-elem([conf,['div','Efecto Wally:',{style: {fontFamily: font,fontSize: 'large',margin: '3px'}}],dist,
+elem([conf,['div','Efecto Wall-E:',{style: {fontFamily: font,fontSize: 'large',margin: '3px'}}],dist,
   ['div',{style: {width: '120px',position: 'relative',fontFamily: font}},
     ['span','0',{style: {position: 'absolute',left: '0px'}}],
     ['span','200',{style: {position: 'absolute',right: '0px'}}]
