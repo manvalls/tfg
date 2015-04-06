@@ -215,6 +215,8 @@ De esta manera, cada usuario procesa únicamente su propio audio, y envía los r
 
 Este es un punto no crítico dado por la necesidad de satisfacer las deficiencias de Google Chrome, que además presenta una clara ventaja: cada transformada de Fourier se realiza una sola vez, reduciendo así el coste de procesamiento en detrimento del ancho de banda utilizado.
 
+En el esquema presentado también se aprecia que, aunque a cada usuario se le presenta información de la transformada de Fourier tanto del audio remoto como del propio, sólo se reproduce el audio remoto, puesto que, además de carecer de información relevante, la reproducción del audio propio puede ocasionar, en entornos en los que el micrófono no esté suficientemente aislado de los altavoces, una realimentación positiva que resulte en la saturación de los altavoces provocando el conocido sonido asociado al *acople*.
+
 ### Obtención y distorsión del audio
 
 ### Transformada de Fourier
