@@ -203,23 +203,25 @@ Como resultado de este cambio de paradigma se obtienen mejoras sustanciales en c
 
 ### Esquema de funcionamiento
 
+La aplicación a desarrollar persigue el establecimiento de conferencias de audio entre múltiples usuarios, en las cuales el audio se envíe a través de tecnología P2P. Teniendo en cuenta la capacidad de las tecnologías disponibles y mencionadas anteriormente, se ha decidido incorporar dos funcionalidades añadidas: distorsión opcional de audio y visionado de la transformada de Fourier del mismo.
+
+Teniendo en cuenta las restricciones de las tecnologías en uso dadas por el soporte presente en los navegadores actuales, el esquema a implementar de la conexión entre dos usuarios cualesquiera sería el siguente:
+
 ![Esquema general](images/esquema.png)
 
-### Arquitectura de la aplicación
+Tal como se observa, el visionado de la transformada de Fourier del audio enviado por el usuario remoto se realiza en base a los datos enviados por él mismo, para circundar los fallos asociados al procesamiento de audio recibido a través de WebRTC presentes en Google Chrome.
 
-#### Librerías vertebrales
+De esta manera, cada usuario procesa únicamente su propio audio, y envía los resultados de este procesamiento al resto de los usuarios. Este modelo protege la privacidad de cada usuario al ser ellos los únicos que tienen acceso al audio sin distorsionar, aunque permite falsear la transformada de Fourier.
 
-##### wapp
+Este es un punto no crítico dado por la necesidad de satisfacer las deficiencias de Google Chrome, que además presenta una clara ventaja: cada transformada de Fourier se realiza una sola vez, reduciendo así el coste de procesamiento en detrimento del ancho de banda utilizado.
 
-##### iku-hub
+### Obtención y distorsión del audio
 
-#### Cliente
+### Transformada de Fourier
 
-#### Servidor
+### Envío de audio e información de la FFT
 
-### Distorsión de audio
-
-### Visionado de la Transformada de Fourier del audio procesado
+### Interfaz
 
 ## Conclusiones
 
