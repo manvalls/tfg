@@ -217,6 +217,22 @@ Este es un punto no crítico dado por la necesidad de satisfacer las deficiencia
 
 En el esquema presentado también se aprecia que, aunque a cada usuario se le presenta información de la transformada de Fourier tanto del audio remoto como del propio, sólo se reproduce el audio remoto, puesto que, además de carecer de información relevante, la reproducción del audio propio puede ocasionar, en entornos en los que el micrófono no esté suficientemente aislado de los altavoces, una realimentación positiva que resulte en la saturación de los altavoces provocando el conocido sonido asociado al *acople*.
 
+Una vez decidida la estructura de la conexión entre usuarios, se ha de escoger la topología de red a nivel de aplicación. Si la aplicación sólo ha de conectar entre sí a dos usuarios, la topología se hace evidente:
+
+![2 usuarios](images/topo/2.png)
+
+Los problemas aparecen al introducir más usuarios. Supongamos que introducimos un tercer usuario y escogemos una topología como la que sigue:
+
+![3 usuarios](images/topo/3.png)
+
+En la topología escogida, *Usuario 1* ha de envíar su audio a *Usuario 2* a través de *Usuario 3*. El principal motivo de elección de esta topología es la reducción del ancho de banda utilizado: en una operación *broadcast* el audio sólo debe enviarse una vez. Sin embargo, además de disminuir el ancho de banda necesario, esta topología tiene fundamentalmente dos deficiencias: aumento de la latencia y graves problemas de seguridad.
+
+El hecho de enviar audio a través de un intermediario en un entorno P2P exige la implementación de criptografía asimétrica, así como el uso de autoridades de certificación, a nivel de aplicación, para cada *peer*, con el fin de evitar ataques *man in the middle*, esto es, para el ejemplo dado, que *Usuario 3* se haga pasar por *Usuario 1*.
+
+Estos algoritmos son lentos y difíciles de implementar en el entorno de una aplicación web, empeorando de forma prohibitiva la latencia, que debe mantenerse baja en aplicaciones de tiempo real como la que nos concierne. Así, para la implementación de la aplicación, se ha elegido una topología de malla completa, con todos los usuarios conectados de forma directa entre sí:
+
+![3 usuarios](images/topo/3-full.png)
+
 ### Obtención y distorsión del audio
 
 ### Transformada de Fourier
