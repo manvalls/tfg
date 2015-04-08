@@ -219,11 +219,11 @@ En el esquema presentado también se aprecia que, aunque a cada usuario se le pr
 
 Una vez decidida la estructura de la conexión entre usuarios, se ha de escoger la topología de red a nivel de aplicación. Si la aplicación sólo ha de conectar entre sí a dos usuarios, la topología se hace evidente:
 
-![2 usuarios](images/topo/2.png)
+![Conexión básica entre dos usuarios](images/topo/2.png)
 
 Los problemas aparecen al introducir más usuarios. Supongamos que introducimos un tercer usuario y escogemos una topología como la que sigue:
 
-![3 usuarios](images/topo/3.png)
+![Topología de malla](images/topo/3.png)
 
 En la topología escogida, *Usuario 1* ha de envíar su audio a *Usuario 2* a través de *Usuario 3*. El principal motivo de elección de esta topología es la reducción del ancho de banda utilizado: en una operación *broadcast* el audio sólo debe enviarse una vez. Sin embargo, además de disminuir el ancho de banda necesario, esta topología tiene fundamentalmente dos deficiencias: aumento de la latencia y graves problemas de seguridad.
 
@@ -231,7 +231,7 @@ El hecho de enviar audio a través de un intermediario en un entorno P2P exige l
 
 Estos algoritmos son lentos y difíciles de implementar en el entorno de una aplicación web, empeorando de forma prohibitiva la latencia, que debe mantenerse baja en aplicaciones de tiempo real como la que nos concierne. Así, para la implementación de la aplicación, se ha elegido una topología de malla completa, con todos los usuarios conectados de forma directa entre sí:
 
-![3 usuarios](images/topo/3-full.png)
+![Topología de malla completa](images/topo/3-full.png)
 
 ### Obtención y distorsión del audio
 
