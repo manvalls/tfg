@@ -235,6 +235,31 @@ Estos algoritmos son lentos y difíciles de implementar en el entorno de una apl
 
 ### Obtención y distorsión del audio
 
+Una vez definido el esquema general de funcionamiento de la aplicación, procedemos a analizar los detalles de la implementación, comenzando por el punto de partida: la obtención del flujo de audio. El entorno web goza de un modelo de seguridad claramente diferenciado del presente en las aplicaciones nativas, con un acceso al *hardware* del terminal fuertemente limitado.
+
+Así, para otorgar acceso al micrófono a nuestra aplicación, el navegador primero solicitará la autorización explícita del usuario. Con el objetivo de no paralizar la ejecución hasta que se produzca dicha autorización, esta tarea viene implementada en forma de una API asíncrona. De esta manera, el código necesario para obtener el flujo de audio asociado al micrófono del terminal es el siguiente:
+
+```javascript
+navigator.getUserMedia({audio: true},
+  
+  function(stream){
+    // El usuario autorizó el
+    // acceso al micrófono
+  },
+  
+  function(error){
+    // El usuario denegó el
+    // acceso o se produjo
+    // un error
+  }
+  
+);
+```
+
+La llamada anterior provoca la aparición, en la versión de desarrollador de Google Chrome a fecha de escritura (43), del siguiente diálogo:
+
+![Solucitud de permiso al usuario](images/permiso.png)
+
 ### Transformada de Fourier
 
 ### Envío de audio e información de la FFT
