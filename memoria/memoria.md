@@ -260,6 +260,14 @@ La llamada anterior provoca la aparición, en la versión de desarrollador de Go
 
 ![Solucitud de permiso al usuario](images/permiso.png)
 
+Si el usuario accede a permitir el acceso al micrófono, el curso de la aplicación prosigue. En caso contrario, se muestra una alerta y se procede a cargar de nuevo la aplicación.
+
+![Alerta mostrada al no poder acceder al micrófono](images/alerta.png)
+
+El siguiente diagrama de flujo representa el procedimiento descrito:
+
+![Diagrama de flujo](images/diagrama.png)
+
 ### Transformada de Fourier
 
 ### Envío de audio e información de la FFT
