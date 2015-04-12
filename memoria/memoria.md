@@ -256,11 +256,12 @@ navigator.getUserMedia({audio: true},
 );
 ```
 
-La llamada anterior provoca la aparición, en la versión de desarrollador de Google Chrome a fecha de escritura (43), del siguiente diálogo:
+Si el usuario accede a permitir el acceso al micrófono, el curso de la aplicación prosigue. En caso contrario, se muestra una alerta y se procede a cargar de nuevo la página de inicio de la aplicación. El usuario tendrá entonces una oportunidad adicional de conceder el permiso pertinente. En la versión de desarrollador de Google Chrome a fecha de escritura (43), los diálogos de alerta y concesión de permisos tienen el siguiente aspecto:
 
 ![Solucitud de permiso al usuario](images/permiso.png)
+![Alerta mostrada al no poder acceder al micrófono](images/alerta.png)
 
-Si el usuario accede a permitir el acceso al micrófono, el curso de la aplicación prosigue. En caso contrario, se muestra una alerta y se procede a cargar de nuevo la aplicación. El siguiente diagrama de flujo representa el procedimiento descrito:
+El siguiente diagrama de flujo representa el procedimiento descrito:
 
 ![Diagrama de flujo](images/diagrama.png)
 
