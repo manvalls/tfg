@@ -274,8 +274,6 @@ Consideremos ahora el efecto de introducir un error de frecuencia en demodulaci√
 
 ![Modulaci√≥n DBL con error de frecuencia](images/dist.png)
 
-
-
 ![Diagrama de flujo](images/diagrama.png)
 
 ### Transformada de Fourier
