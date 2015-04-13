@@ -262,7 +262,17 @@ Si el usuario accede a permitir el acceso al micrófono, el curso de la aplicaci
 
 ![Alerta mostrada al no poder acceder al micrófono](images/alerta.png)
 
-El siguiente diagrama de flujo representa el procedimiento descrito:
+Tras la adquisición del flujo de audio se introducirá la distorsión correspondiente. Buscando intencionadamente la introducción de *aliasing*, se ha decidido implementar la distorsión de audio mediante una modulación DBL demodulada con un cierto error de frecuencia.
+
+Partiendo de conceptos básicos sobre la transformada de Fourier, el funcionamiento es muy sencillo. El espectro de una sinusoide está formado por un par de *deltas* de amplitud mitad, una en frecuencias positivas, a la frecuencia de la sinusoide, y otra en frecuencias negativas. Teniendo en cuenta la dualidad multiplicación-convolución, al multiplicar una señal en el dominio del tiempo por una sinusoide dada el espectro de la señal se *divide* en dos copias de amplitud mitad cuyas frecuencias centrales se encuentran separadas entre sí el doble de la frecuencia de la sinusoide.
+
+Si la frecuencia de la sinusoide es lo suficientemente grande, al multiplicar de nuevo la señal obtenida por una nueva sinusoide con la misma frecuencia y en fase con la usada anteriormente se consigue recuperar el espectro de la señal original atenuado a la mitad de amplitud, junto con un par de copias a frecuencias elevadas. Basta filtrar y amplificar para obtener la señal original.
+
+![Modulación DBL sin error](images/DBL.png)
+
+Consideremos ahora el efecto de introducir un error de frecuencia en demodulación, esto es, usar una frecuencia ligeramente distinta para la segunda sinusoide. La señal recuperada no será ya la original, sino una cuyo espectro sea el resultado de la superposición del espectro de la señal original adelantado en frecuencia con el suyo mismo retrasado. A la distorsión obtenida nos referiremos como *efecto Wall-E*, por su parecido con la voz del personaje Disney.
+
+![Modulación DBL con error de frecuencia](images/dist.png)
 
 ![Diagrama de flujo](images/diagrama.png)
 

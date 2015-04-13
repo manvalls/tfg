@@ -27,8 +27,11 @@ walk(function*(){
   var real = new Float32Array([0,1/2]),
       imag = new Float32Array([0,0]),
       wave = ctx.createPeriodicWave(real,imag),
+      
       gain1 = ctx.createGain(),
       gain2 = ctx.createGain(),
+      gain3 = ctx.createGain(),
+      
       src,dest,audio,f1,f2;
   
   try{ src = ctx.createMediaStreamSource(yield stream); }
@@ -40,6 +43,7 @@ walk(function*(){
   
   gain1.gain.value = 0;
   gain2.gain.value = 0;
+  gain3.gain.value = 2;
   
   osc1 = ctx.createOscillator();
   osc1.setPeriodicWave(wave);
@@ -63,7 +67,8 @@ walk(function*(){
   src.connect(f1);
   f1.connect(gain2);
   gain2.connect(f2);
-  f2.connect(analyser);
+  f2.connect(gain3);
+  gain3.connect(analyser);
   
   dest = ctx.createMediaStreamDestination();
   analyser.connect(dest);
