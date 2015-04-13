@@ -20,7 +20,9 @@
     "y-callback": "",
     "y-resolver": "",
     "y-emitter": "",
-    "y-timers": ""
+    "y-timers": "",
+    "u-su": "",
+    "babel-runtime": ""
   },
   "repository": {
     "type": "git",
