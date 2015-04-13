@@ -21,8 +21,7 @@
     "y-resolver": "",
     "y-emitter": "",
     "y-timers": "",
-    "u-su": "",
-    "babel-runtime": ""
+    "u-su": ""
   },
   "repository": {
     "type": "git",
