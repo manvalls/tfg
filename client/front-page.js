@@ -83,7 +83,7 @@ container.appendChild(input);
 
 window[on]('keydown',function(e){
   if(!active) return;
-  if(e.keyCode == 13) wapp.goTo(input.value);
+  if(e.keyCode == 13) wapp.goTo(input.value,{query: wapp.current.query});
   else input.focus();
 });
 

@@ -4,8 +4,8 @@ var Emitter = require('y-emitter'),
     Su = require('u-su'),
     elem = require('u-elem'),
     walk = require('y-walk'),
-    frame = require('y-timers/frame'),
     wait = require('y-timers/wait'),
+    wapp = require('wapp/client'),
     
     stream = require('./stream.js'),
     ctx = require('./context.js'),
@@ -18,10 +18,8 @@ var Emitter = require('y-emitter'),
     color = Su(),
     cbc = Su(),
     
-    hearMyself = false,
-    
     osc1,osc2,
-    Core,outStream,analyser;
+    Core,outStream,outUrl,analyser;
 
 walk(function*(){
   var real = new Float32Array([0,1/2]),
@@ -56,13 +54,12 @@ walk(function*(){
   osc2.connect(gain1.gain);
   gain1.connect(gain2.gain);
   
-  f2 = ctx.createBiquadFilter();
-  f2.type = 'lowpass';
-  f2.frequency.value = ctx.sampleRate / 4;
-  
   f1 = ctx.createBiquadFilter();
-  f1.type = 'lowpass';
-  f1.frequency.value = ctx.sampleRate / 4;
+  f2 = ctx.createBiquadFilter();
+  
+  f1.type = f2.type = 'lowpass';
+  f1.frequency.value = f2.frequency.value = ctx.sampleRate / 6;
+  f1.Q.value = f2.Q.value = 0.25;
   
   src.connect(f1);
   f1.connect(gain2);
@@ -80,13 +77,6 @@ walk(function*(){
   osc2.start(0);
   
   outStream = dest.stream;
-  
-  if(hearMyself){
-    audio = new Audio();
-    audio.src = URL.createObjectURL(outStream);
-    audio.play();
-  }
-  
 });
 
 function onMsg(msg,en,peer){
@@ -141,6 +131,12 @@ function* setReady(hub,core,name){
   
   core[peer] = new Emitter();
   
+  if('self' in wapp.current.query){
+    core[peer].target.audio = new Audio();
+    core[peer].target.audio.src = outUrl = outUrl || URL.createObjectURL(outStream);
+    core[peer].target.audio.play();
+  }
+  
   server.send(name);
   r = yield this[room];
   
@@ -164,7 +160,12 @@ function* setReady(hub,core,name){
 }
 
 function onceClosed(e,en,core){
-  if(core[peer]) core[peer].set('closed');
+  
+  if(core[peer]){
+    if(core[peer].target.audio) core[peer].target.audio.pause();
+    core[peer].set('closed');
+  }
+  
   core[emitter].unset('ready');
   core[emitter].set('closed');
 }
