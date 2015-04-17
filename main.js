@@ -28,15 +28,18 @@ function cleanRoom(e,en,rooms,name){
   delete rooms[name];
 }
 
-module.exports = wrap(function*(server,path){
+module.exports = function(server,path){
   var app,hp,hub,rooms;
   
-  app = new Wapp(__dirname + '/client',server,path),
+  app = new Wapp(__dirname + '/client',server,path,function(e,loc){
+    console.log(location,e.parts.join());
+  }),
+  
   hp = (path || '') + '/.hub',
   hub = new Server(WsPm(server,hp)),
   rooms = {};
   
   app.on('request',onReq);
   hub.on('client',onClient,rooms);
-});
+};
 
