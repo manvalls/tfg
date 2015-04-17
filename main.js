@@ -31,10 +31,10 @@ function cleanRoom(e,en,rooms,name){
 module.exports = function(server,path){
   var app,hp,hub,rooms;
   
-  app = new Wapp(__dirname + '/client',server,path,function(error,e,location){
-    console.log(location,e.parts.join());
-    if(error) console.error(error.stack);
-  }),
+  app = new Wapp(server,{
+    path: path,
+    client: __dirname + '/client'
+  });
   
   hp = (path || '') + '/.hub',
   hub = new Server(WsPm(server,hp)),
