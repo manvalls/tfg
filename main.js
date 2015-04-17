@@ -31,7 +31,7 @@ function cleanRoom(e,en,rooms,name){
 module.exports = function(server,path){
   var app,hp,hub,rooms;
   
-  app = new Wapp(__dirname + '/client',server,path,function(e,loc){
+  app = new Wapp(__dirname + '/client',server,path,function(e,location){
     console.log(location,e.parts.join());
   }),
   
