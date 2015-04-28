@@ -79,9 +79,8 @@ walk(function*(){
   outStream = dest.stream;
 });
 
-function onMsg(msg,en,peer){
-  if(typeof msg == 'object') peer.give('fft',msg);
-  else peer.give('color',msg);
+function onEvent(msg,en,peer,event){
+  peer.give(event,msg);
 }
 
 function onClosed(msg,en,peer){
@@ -97,24 +96,25 @@ function* onStream(stream,en,core,cbc){
   
   cbc.detach();
   
-  this.on('msg',onMsg,peer);
+  this.ev().on('color',onEvent,peer,'color');
+  this.ev().on('fft',onEvent,peer,'fft');
   this.once('closed',onClosed,peer);
   
   core[emitter].give('peer',peer.target);
   if(this[color]) peer.give('color',this[color]);
 }
 
-function onMsgPrev(msg){
-  if(typeof msg == 'string') this[color] = msg;
+function onColorPrev(msg,c,that){
+  that[color] = msg;
 }
 
 function* onPeer(peer,en,core){
   var cbc;
   
   peer.sendStream(outStream);
-  if(core[color]) peer.send(core[color]);
+  if(core[color]) peer.ev().give('color',core[color]);
   
-  cbc = peer.on('msg',onMsgPrev);
+  cbc = peer.ev().on('color',onColorPrev,peer);
   peer.on('stream',onStream,core,cbc);
 }
 
@@ -153,7 +153,7 @@ function* setReady(hub,core,name){
     analyser.getByteFrequencyData(data);
     data = Array.prototype.slice.call(data,0,8);
     
-    r.send(data);
+    r.ev().give('fft',data);
     core[peer].give('fft',data);
   }
   
@@ -192,7 +192,7 @@ Object.defineProperties(Core.prototype,{
   }},
   
   setColor: {value: walk.wrap(function*(c){
-    (yield this[room]).send(c);
+    (yield this[room]).ev().give('color',c);
     this[color] = c;
     this[peer].give('color',c);
   })}
