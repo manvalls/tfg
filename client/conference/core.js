@@ -108,7 +108,7 @@ function onColorPrev(msg,c,that){
   that[color] = msg;
 }
 
-function* onPeer(peer,en,core){
+function onPeer(peer,en,core){
   var cbc;
   
   peer.sendStream(outStream);
@@ -139,6 +139,7 @@ function* setReady(hub,core,name){
   
   server.send(name);
   r = yield this[room];
+  r.enableRTC();
   
   core[emitter].give('peer',core[peer].target);
   core[emitter].set('ready');
