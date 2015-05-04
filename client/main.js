@@ -36,4 +36,4 @@ wapp.on('rsc',function(e){
   conference.name = e.rsc;
 });
 
-wapp.start();
+wapp.handleCurrent();
