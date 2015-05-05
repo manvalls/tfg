@@ -5,12 +5,7 @@ var Wapp = require('wapp'),
     wrap = require('y-walk').wrap;
 
 function onReq(req){
-  
-  req.answer({
-    title: 'Trabajo Fin de Grado - Manuel Valls Fernández',
-    summary: 'Servicio de Multiconferencia P2P haciendo uso del estándar WebRTC 1.0'
-  });
-  
+  req.answer('default');
 }
 
 function* onClient(client,en,rooms){

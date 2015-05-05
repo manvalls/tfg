@@ -1,0 +1,9 @@
+
+{
+  "data": {
+    "default": {
+      "title":    "Trabajo Fin de Grado - Manuel Valls Fernández",
+      "summary":  "Servicio de Multiconferencia P2P haciendo uso del estándar WebRTC 1.0"
+    }
+  }
+}
