@@ -5,7 +5,7 @@ var Wapp = require('wapp'),
     wrap = require('y-walk').wrap;
 
 function onReq(req){
-  req.answer('default');
+  req.answer('default','es');
 }
 
 function* onClient(client,en,rooms){
