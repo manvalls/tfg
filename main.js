@@ -1,5 +1,5 @@
 var Wapp = require('wapp'),
-    WsPm = require('i-pm/websocket'),
+    WsPm = require('i-pm/ws'),
     Server = require('iku-hub/server'),
     Room = Server.Room,
     wrap = require('y-walk').wrap;
