@@ -282,6 +282,8 @@ Con el fin de evitar el aliasing debido a las copias en frecuencia asociadas al 
 
 ![Diagrama de bloques de la distorsión de voz](images/bloques-dist.png)
 
+Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la misma y enviar tanto la información correspondiente a la misma como el propio flujo de voz.
+
 ![Diagrama de flujo](images/diagrama.png)
 
 ### Transformada de Fourier
