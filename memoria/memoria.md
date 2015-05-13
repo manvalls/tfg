@@ -278,10 +278,9 @@ Una vez definida la estructura de la distorsión, pasamos a diseñar el funciona
 
 Partiendo del flujo obtenido mediante la API `getUserMedia` obtenemos un bloque `MediaStreamAudioSourceNode`, sin entradas y con una salida, que representa el flujo de audio obtenido. Este flujo se hace pasar a través de un filtro bicuadrático paso bajo para limitarlo en frecuencia como parte de la modulación en DBL. Siendo conscientes de las no idealidades de los filtros reales, elegiremos un filtro con una frecuencia de corte igual a la sexta parte de la frecuencia de muestreo.
 
-Con el fin de evitar el aliasing debido a las copias en frecuencia asociadas al procesado discreto, se ha establecido la frecuencia de la portadora como la cuarta parte de la frecuencia de muestreo. Cabe mencionar que, además, la Web Audio API establece que los propios navegadores deben esforzarse por evitar este tipo de aliasing, aunque no impone ningún mecanismo concreto. De esta forma, se multiplicará la señal por un primer oscilador a dicha frecuencia, y a continuación se multiplicará la señal resultante por un segundo oscilador que podrá presentar una variación desde 0 a 200Hz conforme a la del primero, seleccionable por el usuario.
+Con el fin de evitar el aliasing debido a las copias en frecuencia asociadas al procesado discreto, se ha establecido la frecuencia de la portadora como la cuarta parte de la frecuencia de muestreo. Cabe mencionar que, además, la Web Audio API establece que los propios navegadores deben esforzarse por evitar este tipo de aliasing, aunque no impone ningún mecanismo concreto. De esta forma, se multiplicará la señal por un primer oscilador a dicha frecuencia, y a continuación se multiplicará la señal resultante por un segundo oscilador que podrá presentar una variación desde 0 a 200Hz conforme a la del primero, seleccionable por el usuario. Tan solo resta filtrar para obtener la señal con la distorsión seleccionada.
 
-
-
+![Diagrama de bloques de la distorsión de voz](images/bloques-dist.png)
 
 ![Diagrama de flujo](images/diagrama.png)
 
