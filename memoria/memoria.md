@@ -294,6 +294,8 @@ Uno de los bloques disponibles como parte de la Web Audio API es el `AnalyserNod
 
 Nuestro interés radica en mostrar un esbozo de la región relevante de la transformada de Fourier para el audio distorsionado, por lo que para optimizar el uso de ancho de banda nos centraremos en los primeros 8 puntos de la región positiva de la FFT de 32 puntos, esto es, abarcaremos la cuarta parte de la frecuencia de muestreo.
 
+![Extracción de los 8 primeros puntos de la FFT](images/analyzer.png)
+
 ### Envío de audio e información de la FFT
 
 ### Interfaz
