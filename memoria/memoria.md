@@ -284,7 +284,7 @@ De esta forma, se multiplicará la señal por un primer oscilador a dicha frecue
 
 ![Diagrama de bloques de la distorsión de voz](images/bloques-dist.png)
 
-Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la misma y enviar tanto la información correspondiente a la misma como el propio flujo de voz.
+Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la misma y enviar tanto la información correspondiente a ésta como el propio flujo de voz.
 
 ![Diagrama de flujo](images/diagrama.png)
 
@@ -297,6 +297,8 @@ Nuestro interés radica en mostrar un esbozo de la región relevante de la trans
 ![Extracción de los 8 primeros puntos de la FFT](images/analyzer.png)
 
 ### Envío de audio e información de la FFT
+
+Para la conexión entre usuarios se ha hecho uso de una librería de creación propia denominada `iku-hub`.
 
 ### Interfaz
 
