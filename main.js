@@ -8,7 +8,7 @@ function onReq(req){
   req.answer('default','es');
 }
 
-function* onClient(client,en,rooms){
+function* onClient(client,c,rooms){
   var name = yield client.until('msg');
   
   if(!rooms[name]){

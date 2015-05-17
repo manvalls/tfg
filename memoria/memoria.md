@@ -298,7 +298,28 @@ Nuestro interés radica en mostrar un esbozo de la región relevante de la trans
 
 ### Envío de audio e información de la FFT
 
-Para la conexión entre usuarios se ha hecho uso de una librería de creación propia denominada `iku-hub`.
+Para las conexiones se ha hecho uso de una librería de creación propia denominada `iku-hub`, que interconecta usuarios usando uno o varios servidores como intermediarios a través del concepto de salas. Dicha librería está diseñada con el objetivo de ser altamente extensible, de forma que forzar el uso de WebRTC (P2P) para las conexiones entre usuarios resulta una tarea sencilla, gracias a los diversos *plugins* incluidos por defecto.
+
+El código relevante a ejecutar por node.js en el servidor es muy sencillo:
+
+```javascript
+function* onClient(client,c,rooms){
+  var name = yield client.until('msg');
+  
+  if(!rooms[name]){
+    rooms[name] = new Room();
+    rooms[name].add(client);
+    rooms[name].once('empty',cleanRoom,rooms,name);
+  }else rooms[name].add(client);
+  
+}
+
+function cleanRoom(e,en,rooms,name){
+  delete rooms[name];
+}
+```
+
+El primer y único mensaje que se recibe desde el cliente consiste en una cadena de caracteres con el nombre de la sala a la que el cliente en cuestión se quiere conectar. Al ser una operación asíncrona la encuadramos en una `function*`.
 
 ### Interfaz
 
