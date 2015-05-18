@@ -131,7 +131,7 @@ Con este fin, es necesaria la intervención de servidores auxiliares que determi
 
 Como se aprecia, el usuario solicita al servidor ICE el envío de un candidato que contenga la información relevante: direcciones IP, puertos disponibles, etc. Una vez obtenido el candidato, éste se envía fuera de banda al otro usuario. El circuito se completa cuando ambos usuarios toman posesión de los candidatos correspondientes, pudiendo así determinar el camino a seguir para establecer una conexión.
 
-Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿Intercambio de datos binarios? ¿Transmisión y recepción de audio y video? ¿Con qué codecs? ¿Cuánto ancho de banda se usará? Con el fin de que ambos usuarios conozcan las respuestas a esas preguntas se utiliza el protocolo SDP.
+Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿Intercambio de datos binarios? ¿Transmisión y recepción de audio y video? ¿Con qué códecs? ¿Cuánto ancho de banda se usará? Con el fin de que ambos usuarios conozcan las respuestas a esas preguntas se utiliza el protocolo SDP.
 
 Uno de los usuarios, el que inicia la conexión, elabora una oferta con las características de los canales de datos y flujos de audio y video que desea establecer, con información como los códecs disponibles y las restricciones de ancho de banda a imponer. Dicha oferta se envía fuera de banda - recordemos que aún no se ha establecido la conexión - al otro usuario, el cual, en base a los códecs y demás funciones de las que dispone, elabora su respuesta, incorporando en ella la información relevante de sus propios flujos de datos o audio y video, si los hubiera.
 
@@ -308,20 +308,29 @@ function* onClient(client,c,rooms){
   
   if(!rooms[name]){
     rooms[name] = new Room();
-    rooms[name].add(client);
     rooms[name].once('empty',cleanRoom,rooms,name);
-  }else rooms[name].add(client);
+  }
+  
+  rooms[name].add(client);
   
 }
 
-function cleanRoom(e,en,rooms,name){
+function cleanRoom(e,c,rooms,name){
   delete rooms[name];
 }
 ```
 
-El primer y único mensaje que se recibe desde el cliente consiste en una cadena de caracteres con el nombre de la sala a la que el cliente en cuestión se quiere conectar. Al ser una operación asíncrona la encuadramos en una `function*`.
+El primer y único mensaje que se recibe desde el cliente consiste en una cadena de caracteres con el nombre de la sala a la que el cliente en cuestión se quiere conectar. El hecho de recibir un mensaje desde el cliente reune las condiciones para implementarse de forma asíncrona: una operación lenta que no depende del procesador. Por consiguiente la encuadramos en una `function*` y empleamos el operador `yield`.
+
+Para almacenar las salas empleamos un vector asociativo denominado `rooms`. Cabe destacar que, en JavaScript, cualquier objeto constituye un vector asociativo, esto es, un vector cuyos índices vienen dados por cadenas de caracteres. Creamos la sala si no existe y añadimos al usuario a la misma. Cuando la sala queda vacía, la eliminamos de nuestro vector asociativo.
+
+La librería se encarga de establecer conexiones entre todos los usuarios de una misma sala. Uno de los *plugins* incluidos por defecto expone la llamada `sendStream`, que nos permite enviar a través de P2P, mediante WebRTC, el flujo de voz obtenido anteriormente, abstrayendo todo el proceso y permitiendo operar a alto nivel. El códec a usar queda a elección del navegador, generalmente iSAC.
+
+Asimismo, mediante la llamada `enableRTC` permitimos que las conexiones entre usuarios de una sala de realicen a través de canales de datos WebRTC, usando JSON codificado en UTF-8 como formato de serialización. Los datos relativos a la FFT se enviarán como un vector de ocho elementos cuyos valores serán números naturales inferiores a 256.
 
 ### Interfaz
+
+![Página de inicio](images/interfaz/portal.png)
 
 ## Conclusiones
 

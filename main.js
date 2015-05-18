@@ -13,13 +13,14 @@ function* onClient(client,c,rooms){
   
   if(!rooms[name]){
     rooms[name] = new Room();
-    rooms[name].add(client);
     rooms[name].once('empty',cleanRoom,rooms,name);
-  }else rooms[name].add(client);
+  }
+  
+  rooms[name].add(client);
   
 }
 
-function cleanRoom(e,en,rooms,name){
+function cleanRoom(e,c,rooms,name){
   delete rooms[name];
 }
 

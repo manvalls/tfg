@@ -108,7 +108,7 @@ function onColorPrev(msg,c,that){
   that[color] = msg;
 }
 
-function onPeer(peer,en,core){
+function onPeer(peer,c,core){
   var cbc;
   
   peer.sendStream(outStream);
