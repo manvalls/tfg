@@ -19,8 +19,10 @@ var elem = require('u-elem'),
     
     rangeClass = new Class().apply({
       width: width + 'px',
-      margin: '2px',
-      marginTop: '3px'
+      overflow: 'hidden',
+      margin: '0px',
+      marginTop: '3px',
+      marginBottom: '2px'
     }),
     
     contClass = new Class().apply({
