@@ -324,13 +324,15 @@ Para almacenar las salas empleamos un vector asociativo denominado `rooms`. Cabe
 
 La librería se encarga de establecer conexiones entre todos los usuarios de una misma sala. Uno de los *plugins* incluidos por defecto expone la llamada `sendStream`, que nos permite enviar a través de P2P, mediante WebRTC, el flujo de voz obtenido anteriormente, abstrayendo todo el proceso y permitiendo operar a alto nivel. El códec a usar queda a elección del navegador, generalmente iSAC.
 
-Asimismo, mediante la llamada `enableRTC` permitimos que las conexiones entre usuarios de una sala de realicen a través de canales de datos WebRTC, usando JSON codificado en UTF-8 como formato de serialización. Los datos relativos a la FFT se enviarán como un vector de ocho elementos cuyos valores posibles serán los números naturales inferiores a 256, en tiempo real, a una cierta frecuencia.
+Asimismo, mediante la llamada `enableRTC` permitimos que las conexiones entre usuarios de una sala se realicen a través de canales de datos WebRTC, usando JSON codificado en UTF-8 como formato de serialización. Los datos relativos a la FFT se enviarán como un vector de ocho elementos cuyos valores posibles serán los números naturales inferiores a 256, en tiempo real, a una cierta frecuencia.
 
 ## Interfaz
 
 ![Página de inicio](images/interfaz/portal.png)
 
 ![Interfaz principal](images/interfaz/main.png)
+
+![Más de dos usuarios](images/interfaz/multi.png)
 
 # Conclusiones
 
