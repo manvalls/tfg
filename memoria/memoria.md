@@ -1,24 +1,22 @@
-# Implementación de un servicio de multiconferencia P2P
+# Introducción
 
-## Introducción
-
-## Tecnologías
+# Tecnologías
 
 Con el fin de realizar el proyecto propuesto se ha decido emplear el siguiente conjunto de tecnologías, primando estándares y herramientas abiertas frente a alternativas propietarias:
 
-### HTML5
+## HTML5
 
 Con origen en el CERN, HTML ha evolucionado hasta convertirse en el lenguaje de marcado *de facto* de la web, aumentando su relevancia a la par que lo hace la variedad de terminales orientados al usuario final, siendo una elección recurrente a la hora de desarrollar aplicaciones multiplataforma.
 
 Su última iteración, HTML5, introduce nuevos elementos que nos permiten redefinir el concepto de *aplicación web*, creando experiencias interactivas que van más allá del hipertexto.
 
-### CSS3
+## CSS3
 
 Y si HTML se ha convertido en el lenguaje de marcado por excelencia de la web, CSS conforma el conjunto de reglas y estilos que nos permiten controlar la apariencia de los contenidos descritos en el documento HTML. De esta forma, cosas como el elemento `font` fueron paulatinamente desapareciendo de HTML para ceder el control a CSS, restringiendo las competencias de HTML a lo puramente semántico.
 
 Con CSS3 la especificación se modulariza, desarrollando en paralelo cada una de las diferentes secciones y permitiendo aplicar rotaciones, transiciones e incluso complejos efectos de imagen.
 
-### ECMAScript 6
+## ECMAScript 6
 
 Para completar el conjunto de tecnologías que permitan la creación de efectivas aplicaciones web se hace necesaria la incorporación de un tercer elemento: un lenguaje de programación. JavaScript hizo su aparición por primera vez en el navegador Netscape como una alternativa para *amateurs* a Java, el lenguaje de moda del momento.
 
@@ -95,13 +93,13 @@ Debemos evitar pensar en JavaScript como un lenguaje concurrente: cada script se
 
 Con la introducción de ECMAScript 6 a lo anterior hay que añadir que, dentro de una función generadora, solo se puede romper la ejecución al alcanzar la palabra clave `yield`. Así, a pesar de tener la ilusión de estar trabajando con un código síncrono, la ejecución es efectivamente asíncrona, dejando tiempo al navegador para ocuparse de otras tareas.
 
-### HTTP/1.1
+## HTTP/1.1
 
 Ya tenemos el lenguaje de marcado, los estilos y el lenguaje de programación, solo resta establecer el protocolo de transporte. HTTP y su modelo petición - respuesta, cimentado sobre TCP, aparece como el protocolo ideal para la transmisión fiable de los datos que componen el código de nuestra aplicación web: texto.
 
 Aunque existen nuevas versiones como SPDY o HTTP/2, el conjunto de métodos y la sintáxis del mensaje se mantienen invariantes desde HTTP/1.1, con las nuevas mejoras centrándose en los métodos de transporte. Esto nos permite trabajar sobre HTTP/1.1 sin renunciar a los avances introducidos en SPDY y HTTP/2, ya que una simple actualización de la librería subyacente basta para aprovechar prácticamente al máximo estas nuevas versiones.
 
-### WebSocket
+## WebSocket
 
 A pesar de la idoneidad de HTTP para transmitir el código de una aplicación web, presenta una clara limitación: el modelo petición - respuesta exige que la comunicación sea iniciada por el cliente. En muchas aplicaciones es deseable que el servidor sea capaz de enviar mensajes al cliente sin que éste los haya solicitado, mensajes a los que el cliente pueda reaccionar y actuar en consecuencia.
 
@@ -109,7 +107,7 @@ El modelo de seguridad presente en las aplicaciones web impide el manejo directo
 
 Aprovechando el camino abierto gracias a esta cabecera, el IETF estandarizó en 2011 el protocolo WebSocket, dotando a las aplicaciones web de un canal de comunicación con las características de una conexión TCP, añadiendo el concepto de *mensajes* y permitiendo así una comunicación *full-duplex* más allá del modelo petición - respuesta.
 
-### WebRTC 1.0
+## WebRTC 1.0
 
 Con las tecnologías descritas hasta el momento sólo es posible comunicarse de forma directa con un servidor, motivo por el cual durante años las comunicaciones entre usuarios se realizaban de forma indirecta, usando el servidor como intermediario.
 
@@ -139,7 +137,7 @@ Uno de los usuarios, el que inicia la conexión, elabora una oferta con las cara
 
 Una vez que el intercambio oferta - respuesta se ha completado y, por medio de los candidatos ICE, se ha encontrado el camino adecuado para la conexión, ésta queda correctamente establecida, permitiendo el envío de datos punto a punto, desde navegadores web, sin usar un servidor como intermediario: tecnología P2P a una URL de distancia.
 
-### Web Audio API
+## Web Audio API
 
 A lo largo del grado no solo se nos ha enseñado a transmitir audio, también hemos aprendido a modularlo, a filtrarlo, en definitiva, a procesarlo. Ya en 2010 Mozilla implementó en su navegador una API a la que denominó Audio Data API, con un modelo similar al de la API que el W3C empezaría a estandarizar en 2013 bajo el nombre de Web Audio API.
 
@@ -179,7 +177,7 @@ El diagrama de bloques correspondiente sería el siguiente:
 
 Puesto que la Web Audio API no implementa el bloque multiplicador, hemos de construirlo nosotros usando un amplificador con ganancia controlada por amplitud, la de la otra señal a multiplicar. El código de ejemplo suministrado hace sonar por la salida de audio un seno cuadrático obtenido de dos senos a frecuencia 200Hz, con lo que la señal obtenida tendrá cierto nivel de contínua y una frecuencia de 400Hz.
 
-### Soporte en navegadores
+## Soporte en navegadores
 
 Google Chrome, y en especial Mozilla Firefox, realizan un soberbio trabajo implementando las tecnologías más modernas incluso cuando su estandarización aún no ha sido completada, por lo que éstos y sus derivados contienen soporte en sus versiones estables tanto para WebRTC 1.0 como para la Web Audio API, sin fallos importantes de funcionamiento cuando ambas tecnologías trabajan por separado.
 
@@ -189,7 +187,7 @@ Mozilla Firefox, por contrapartida, es capaz de procesar audio recibido a travé
 
 ![Bug Firefox](images/bug-firefox.png)
 
-### Node.js
+## Node.js
 
 Hasta ahora nos hemos centrado en tecnologías y estándares, toca hablar de software específico para servidores. Ya en 1994 Netscape ofreció herramientas que permitían la ejecución de JavaScript en servidores, sin embargo no fue hasta 2009 cuando, impulsado por el notable aumento de prestaciones de los modernos motores de JavaScript, Ryan Dahl creó Node.js. Desde entonces este proyecto basado en el motor de JavaScript de Google Chrome, V8, no ha hecho más que crecer, impulsando un nuevo modelo de servidores especialmente adecuados para aplicaciones en tiempo real.
 
@@ -199,9 +197,9 @@ Soluciones síncronas como PHP solventan este problema lanzando una hebra para c
 
 Como resultado de este cambio de paradigma se obtienen mejoras sustanciales en capacidad de usuarios y tiempo de respuesta, además de código reusable al compartir el mismo lenguaje de programación tanto en el cliente como en el servidor. En los últimos años se ha producido un aumento expectacular de la popularidad de Node.js, creando un ecosistema extenso y variado de librerías y recursos a través de su gestor de paquetes oficial, npm (*node package manager*).
 
-## Desarrollo
+# Desarrollo
 
-### Esquema de funcionamiento
+## Esquema de funcionamiento
 
 La aplicación a desarrollar persigue el establecimiento de conferencias de audio entre múltiples usuarios, en las cuales el audio se envíe a través de tecnología P2P. Teniendo en cuenta la capacidad de las tecnologías disponibles y mencionadas anteriormente, se ha decidido incorporar dos funcionalidades añadidas: distorsión opcional de audio y visionado de la transformada de Fourier del mismo.
 
@@ -233,7 +231,7 @@ Estos algoritmos son lentos y difíciles de implementar en el entorno de una apl
 
 ![Topología de malla completa](images/topo/3-full.png)
 
-### Obtención y distorsión del audio
+## Obtención y distorsión del audio
 
 Una vez definido el esquema general de funcionamiento de la aplicación, procedemos a analizar los detalles de la implementación, comenzando por el punto de partida: la obtención del flujo de audio. El entorno web goza de un modelo de seguridad claramente diferenciado del presente en las aplicaciones nativas, con un acceso al *hardware* del terminal fuertemente limitado.
 
@@ -288,7 +286,7 @@ Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la 
 
 ![Diagrama de flujo](images/diagrama.png)
 
-### Transformada de Fourier
+## Transformada de Fourier
 
 Uno de los bloques disponibles como parte de la Web Audio API es el `AnalyserNode`, con una entrada y una salida, que permite obtener información de una señal tanto en el dominio del tiempo como en el dominio de la frecuencia. Usando este bloque podemos obtener FFTs de 32 o más puntos, siempre que dicho número de puntos sea potencia de dos, para garantizar que la FFT sea totalmente optimizable.
 
@@ -296,7 +294,7 @@ Nuestro interés radica en mostrar un esbozo de la región relevante de la trans
 
 ![Extracción de los 8 primeros puntos de la FFT](images/analyzer.png)
 
-### Envío de audio e información de la FFT
+## Envío de audio e información de la FFT
 
 Para las conexiones se ha hecho uso de una librería de creación propia denominada `iku-hub`, que interconecta usuarios usando uno o varios servidores como intermediarios a través del concepto de salas. Dicha librería está diseñada con el objetivo de ser altamente extensible, de forma que forzar el uso de WebRTC (P2P) para las conexiones entre usuarios resulta una tarea sencilla, gracias a los diversos *plugins* incluidos por defecto.
 
@@ -328,13 +326,13 @@ La librería se encarga de establecer conexiones entre todos los usuarios de una
 
 Asimismo, mediante la llamada `enableRTC` permitimos que las conexiones entre usuarios de una sala de realicen a través de canales de datos WebRTC, usando JSON codificado en UTF-8 como formato de serialización. Los datos relativos a la FFT se enviarán como un vector de ocho elementos cuyos valores posibles serán los números naturales inferiores a 256, en tiempo real, a una cierta frecuencia.
 
-### Interfaz
+## Interfaz
 
 ![Página de inicio](images/interfaz/portal.png)
 
 ![Interfaz principal](images/interfaz/main.png)
 
-## Conclusiones
+# Conclusiones
 
-## Bibliografía
+# Bibliografía
 
