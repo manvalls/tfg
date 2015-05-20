@@ -282,7 +282,7 @@ De esta forma, se multiplicará la señal por un primer oscilador a dicha frecue
 
 ![Diagrama de bloques de la distorsión de voz](images/bloques-dist.png)
 
-Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la misma y enviar tanto la información correspondiente a ésta como el propio flujo de voz.
+Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la misma y enviar tanto la información correspondiente a ésta como el propio flujo de voz. El proceso conjunto desde que se carga la aplicación hasta que se realiza el envío de la información podría verse esquematizado en el siguiente diagrama de flujo:
 
 ![Diagrama de flujo](images/diagrama.png)
 
@@ -329,6 +329,8 @@ La librería se encarga de establecer conexiones entre todos los usuarios de una
 Asimismo, mediante la llamada `enableRTC` permitimos que las conexiones entre usuarios de una sala se realicen a través de canales de datos WebRTC, usando JSON codificado en UTF-8 como formato de serialización. Los datos relativos a la FFT se enviarán como un vector de ocho elementos cuyos valores posibles serán los números naturales inferiores a 256, en tiempo real, a una cierta frecuencia.
 
 ## Interfaz
+
+Para el desarrollo de la interfaz de usuario se ha hecho uso de varias librerías también de creación propia, siendo la principal de ellas `wapp`, que permite realizar aplicaciones web de una sola página de forma directa. En una aplicación web desarrollada usando `wapp`, toda la página se descarga una sola vez, de forma que la transición entre las distintas secciones es lo más fluida posible. Esto no significa, sin embargo, que toda la aplicación web esté contenida en una misma URL: la URL cambia conforme navegamos por la aplicación, pero sin ocasionar una recarga de la página.
 
 ![Página de inicio](images/interfaz/portal.png)
 
