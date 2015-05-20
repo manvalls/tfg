@@ -338,6 +338,8 @@ Como ya se ha expuesto, las conexiones se realizan a través de salas cuyo nombr
 
 ![Página de inicio](images/interfaz/portal.png)
 
+Persiguiendo dicho estilo, la página de inicio carece de cualquier tipo de botón: para indicar que el texto introducido es el nombre de la sala deseada se ha de introducir un retorno de carro. Una vez que se realiza dicha acción, se envía el nombre de la sala al servidor, la URL se actualiza y la página de inicio realiza un desplazamiento con transición hacia la izquierda, a la par que la interfaz de la multiconferencia aparece desde la derecha.
+
 ### Multiconferencia
 
 ![Interfaz principal](images/interfaz/main.png)
