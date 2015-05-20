@@ -342,7 +342,19 @@ Persiguiendo dicho estilo, la página de inicio carece de cualquier tipo de bot�
 
 ### Multiconferencia
 
+La interfaz de la multiconferencia se encuentra dividida en tres partes, dos de ellas de control y una tercera de presentación de la información. Éstas tres partes se organizan de forma vertical centrada e intercalada a lo largo de la página, estando situada la parte de presentación entre las dos partes de control.
+
 ![Interfaz principal](images/interfaz/main.png)
+
+Comenzado por la parte superior, encontramos el primer elemento de control: la selección de color, con la que podemos determinar el aspecto que tendrá la presentación de nuestra FFT. Se ha introducido este elemento para facilitar la distinción de los miembros de la sala, de esta forma cada usuario podrá informar al resto de qué representación de la FFT es la que le corresponde con solo indicar su color.
+
+El segundo elemento es el de presentación, aquí se esbozan las FFT de los distintos usuarios, incluida la propia. Se incluyen controles de volumen bajo cada esbozo perteneciente a usuarios remotos, permitiendo ajustar o silenciar a miembros molestos de la sala. Esta sección permite conocer el número de miembros de la sala con solo observar la cantidad de esbozos presentes.
+
+La frecuencia de refresco de los esbozos se ha fijado en 10Hz para optimizar el uso de ancho de banda. Puesto que dicha frecuencia es bastante baja, en condiciones normales el efecto parpadeo sería fuertemente apreciable. Para contrarrestarlo, se realiza una interpolación lineal entre dos muestras consecutivas de la FFT, eliminando el efecto parpadeo y consiguiendo una frecuencia de refresco aparente equivalente a la del monitor del usuario.
+
+Por último se encuentra el control de distorsión, con el que ajustamos el error de frecuencia aplicado a nuestro flujo de audio. La cantidad de distorsión aplicada no será visible para los usuarios remotos, mejorando aún más la irreversibilidad del proceso y garantizando el anonimato del usuario.
+
+En la figura anterior queda de manifiesto que los esbozos de la FFT se distribuyen de forma horizontal. Si el número de usuarios de la sala provoca un elemento de presentación con un ancho superior al de la ventana del navegador, se introduce un salto de línea aumentando así la altura de dicho elemento para aprovechar el espacio disponible de la forma más eficiente posible.
 
 ![Más de dos usuarios](images/interfaz/multi.png)
 
