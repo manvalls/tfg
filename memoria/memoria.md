@@ -332,7 +332,13 @@ Asimismo, mediante la llamada `enableRTC` permitimos que las conexiones entre us
 
 Para el desarrollo de la interfaz de usuario se ha hecho uso de varias librerías también de creación propia, siendo la principal de ellas `wapp`, que permite realizar aplicaciones web de una sola página de forma directa. En una aplicación web desarrollada usando `wapp`, toda la página se descarga una sola vez, de forma que la transición entre las distintas secciones es lo más fluida posible. Esto no significa, sin embargo, que toda la aplicación web esté contenida en una misma URL: la URL cambia conforme navegamos por la aplicación, pero sin ocasionar una recarga de la página.
 
+### Página de inicio
+
+Como ya se ha expuesto, las conexiones se realizan a través de salas cuyo nombre hay que enviar al servidor. Por consiguiente, al visitar la página de inicio de la aplicación, se debe requerir al usuario que especifique el nombre de la sala a la cual se quiere conectar. Se ha apostado por una página de inicio minimalista, con tan solo un campo de entrada de texto y un mensaje explicativo de la clase de texto que se espera:
+
 ![Página de inicio](images/interfaz/portal.png)
+
+### Multiconferencia
 
 ![Interfaz principal](images/interfaz/main.png)
 
