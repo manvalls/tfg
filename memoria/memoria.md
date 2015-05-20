@@ -294,6 +294,8 @@ Nuestro interés radica en mostrar un esbozo de la región relevante de la trans
 
 ![Extracción de los 8 primeros puntos de la FFT](images/analyzer.png)
 
+La información de la FFT se puede obtener en dos formatos: flotantes o enteros sin signo de un byte. De nuevo para optimizar el ancho de banda, y teniendo en cuenta que lo que se persigue es realizar un esbozo, se ha tomado la decisión de usar enteros, mediante la llamada `getByteFrequencyData` del `AnalyserNode`.
+
 ## Envío de audio e información de la FFT
 
 Para las conexiones se ha hecho uso de una librería de creación propia denominada `iku-hub`, que interconecta usuarios usando uno o varios servidores como intermediarios a través del concepto de salas. Dicha librería está diseñada con el objetivo de ser altamente extensible, de forma que forzar el uso de WebRTC (P2P) para las conexiones entre usuarios resulta una tarea sencilla, gracias a los diversos *plugins* incluidos por defecto.
