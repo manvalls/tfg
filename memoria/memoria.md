@@ -1,5 +1,13 @@
 # Introducción
 
+Cuando el término "telecomunicación" fue ideado, a principios del siglo XX, la telefonía ya era una realidad. No en vano constituye uno de los ejemplos clásicos más recurrentes de telecomunicación. Años después, sin embargo, ha pasado a ocupar tan solo una pequeña fracción del tiempo que empleamos a diario en *telecomunicarnos*, eclipsada tras la aparición de Internet y el sinfín de posibilidades que trajo consigo.
+
+Tal vez sea el momento de cambiar de ejemplo. Difícil sería encontrar mejor sustituto que la *World Wide Web*: muchos empezamos a *navegarla* antes de nuestra primera cerveza, y no pocos incluso la consideran sinónimo de Internet. Aún hoy, la idea de código recibido e interpretado al momento, con información autocontenida acerca de las normas a seguir para el mantenimiento de la comunicación, sigue siendo sujeto de fascinación.
+
+Mucho ha cambiado en la corta vida de la web, y hoy día las cosas que ese trozo de código recibido desde un servidor remoto no puede hacer son pocas y muy específicas. La comunicación acústica no es una de ellas. En este trabajo el lector observará la fusión del mundo clásico con el moderno, contemplando como un programa completo es transmitido a distancia hasta su terminal y comienza a ejecutarse en menos de un segundo para establecer una multiconferencia punto a punto con el resto de usuarios de la aplicación.
+
+Por si esto no bastara, en una era marcada por la profunda amenaza a la privacidad del usuario, el programa empleará conceptos usados en modulaciones analógicas para distorsionar digitalmente la voz de los participantes en la conferencia, si así lo consideran oportuno. De nuevo, lo clásico y lo moderno confluyen para brindar una experiencia de usuario única, todo ello con la comodidad de la web.
+
 # Tecnologías
 
 Con el fin de realizar el proyecto propuesto se ha decido emplear el siguiente conjunto de tecnologías, primando estándares y herramientas abiertas frente a alternativas propietarias:
@@ -181,11 +189,11 @@ Puesto que la Web Audio API no implementa el bloque multiplicador, hemos de cons
 
 Google Chrome, y en especial Mozilla Firefox, realizan un soberbio trabajo implementando las tecnologías más modernas incluso cuando su estandarización aún no ha sido completada, por lo que éstos y sus derivados contienen soporte en sus versiones estables tanto para WebRTC 1.0 como para la Web Audio API, sin fallos importantes de funcionamiento cuando ambas tecnologías trabajan por separado.
 
-Los fallos aparecen al combinar ambas tecnologías. En el momento de este escrito, Google Chrome permite transmitir audio procesado, pero es incapaz de procesar audio recibido mediante WebRTC (véase el bug 121673 de Chromium). Según informan miembros del proyecto, arreglar este fallo implicaría un cuatrimestre de trabajo, y aún no han empezado a plantear una posible solución, por lo que a efectos de este escrito este fallo se considerará permanente.
+Los fallos aparecen al combinar ambas tecnologías. En el momento de este escrito, Google Chrome permite transmitir audio procesado, pero es incapaz de procesar audio recibido mediante WebRTC (véase el fallo 121673 de Chromium). Según informan miembros del proyecto, arreglar este fallo implicaría un cuatrimestre de trabajo, y aún no han empezado a plantear una posible solución, por lo que a efectos de este escrito este fallo se considerará permanente.
 
-Mozilla Firefox, por contrapartida, es capaz de procesar audio recibido a través de WebRTC sin problemas, pero la versión estable a fecha de escritura, Firefox 36, presenta fallos en el envío de audio procesado (véase el bug 1081819 de Mozilla). En la página del bug se me confirmó que estaría arreglado en la versión Nightly del momento, y en efecto el fallo se corrigió en la versión 39, cuyo paso a estable está previsto para Junio de este año.
+Mozilla Firefox, por contrapartida, es capaz de procesar audio recibido a través de WebRTC sin problemas, pero la versión estable a fecha de escritura, Firefox 36, presenta fallos en el envío de audio procesado (véase el fallo 1081819 de Mozilla). En la página del fallo se nos confirmó que estaría arreglado en la versión Nightly del momento, y en efecto el fallo se corrigió en la versión 39, cuyo paso a estable está previsto para Junio de este año.
 
-![Bug Firefox](images/bug-firefox.png)
+![Informe sobre la situación del fallo presente en Mozilla Firefox](images/bug-firefox.png)
 
 ## Node.js
 
@@ -288,7 +296,7 @@ Una vez obtenida la señal distorsionada, sólo nos resta calcular la FFT de la 
 
 ## Transformada de Fourier
 
-Uno de los bloques disponibles como parte de la Web Audio API es el `AnalyserNode`, con una entrada y una salida, que permite obtener información de una señal tanto en el dominio del tiempo como en el dominio de la frecuencia. Usando este bloque podemos obtener FFTs de 32 o más puntos, siempre que dicho número de puntos sea potencia de dos, para garantizar que la FFT sea totalmente optimizable.
+Uno de los bloques disponibles como parte de la Web Audio API es el `AnalyserNode`, con una entrada y una salida, que permite obtener información de una señal tanto en el dominio del tiempo como en el dominio de la frecuencia. Usando este bloque podemos obtener FFT de 32 o más puntos, siempre que dicho número de puntos sea potencia de dos, para garantizar que la FFT sea totalmente optimizable.
 
 Nuestro interés radica en mostrar un esbozo de la región relevante de la transformada de Fourier para el audio distorsionado, por lo que para optimizar el uso de ancho de banda nos centraremos en los primeros 8 puntos de la región positiva de la FFT de 32 puntos, esto es, abarcaremos la cuarta parte de la frecuencia de muestreo.
 
@@ -354,11 +362,30 @@ La frecuencia de refresco de los esbozos se ha fijado en 10Hz para optimizar el 
 
 Por último se encuentra el control de distorsión, con el que ajustamos el error de frecuencia aplicado a nuestro flujo de audio. La cantidad de distorsión aplicada no será visible para los usuarios remotos, mejorando aún más la irreversibilidad del proceso y garantizando el anonimato del usuario.
 
-En la figura anterior queda de manifiesto que los esbozos de la FFT se distribuyen de forma horizontal. Si el número de usuarios de la sala provoca un elemento de presentación con un ancho superior al de la ventana del navegador, se introduce un salto de línea aumentando así la altura de dicho elemento para aprovechar el espacio disponible de la forma más eficiente posible.
+En la figura anterior queda de manifiesto que los esbozos de la FFT se distribuyen de forma horizontal. Si el número de usuarios de la sala provoca un elemento de presentación con un ancho superior al de la ventana del navegador, se introduce un salto de línea aumentando así la altura de dicho elemento para aprovechar el espacio disponible de la forma más eficiente posible:
 
 ![Más de dos usuarios](images/interfaz/multi.png)
 
 # Conclusiones
 
 # Bibliografía
+
+Todas las figuras presentes en el documento han sido realizadas por el autor del mismo, haciendo uso de la herramienta *Inkscape* y sin incluir elementos gráficos de terceros. Las capturas de pantalla han sido tomadas del navegador Google Chrome, canal *dev*. Las fuentes consultadas para el desarrollo de la aplicación corresponden a los respectivos estándares del W3C, la ECMA y la IETF, a saber:
+
+- TC39, "ECMAScript 2015 Language Specification", Ecma, ECMA-262 6th Edition / Draft April 3 2015, Abril, 2015.
+- W3C WebRTC Working Group, "WebRTC 1.0: Real-time Communication Between Browsers", W3C, WebRTC Working Draft 10 February 2015, Febrero, 2015
+- P. Adenot, C. Wilson, C. Rogers, "Web Audio API", W3C, Web Audio API Working Draft 10 October 2013, Octubre, 2013
+- I. Fette, A. Melnikov, "The WebSocket Protocol", IETF, RFC 6455, Diciembre, 2011
+
+Los conocimientos necesarios para llevar a cabo la distorsión de voz han sido adquiridos a lo largo del grado, especialmente en las siguientes asignaturas:
+
+- M. Aguayo, "Teoría de la Comunicación", ETSIT UMA, 2014/2015
+- J. Entrambasaguas, "Fundamentos del Procesado Digital de la Señal", ETSIT UMA, 2014/2015
+
+Se han consultado así mismo los siguientes informes acerca de fallos en navegadores:
+
+- Bug 1081819 - WebAudio data isn't transmitting over established peerConnection ( bugzilla.mozilla.org/show_bug.cgi?id=1081819 )
+- Issue 121673:	Hook up Web Audio API with WebRTC for audio processing ( code.google.com/p/chromium/issues/detail?id=121673 )
+
+La aplicación web desarrollada es el fruto de varios años de dedicación al desarrollo web de manera independiente. Las fuentes consultadas a lo largo de ese tiempo no están reflejadas en este documento.
 
