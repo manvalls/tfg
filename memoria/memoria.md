@@ -144,9 +144,9 @@ Aprovechando el camino abierto gracias a esta cabecera, el IETF estandarizó en 
 
 Con las tecnologías descritas hasta el momento sólo es posible comunicarse de forma directa con un servidor, motivo por el cual durante años las comunicaciones entre usuarios se realizaban de forma indirecta, usando el servidor como intermediario.
 
-![Servidor como intermediario](images/webrtc/relay.png)
+![Uso de un servidor como intermediario](images/webrtc/relay.png)
 
-Resulta evidente lo ineficiente de esta técnica: la latencia, el tiempo que tarda en llegar un mensaje de un usuario a otro, se multiplica por dos, primero de un usuario al servidor, y luego del servidor al otro usuario. Era solo cuestión de tiempo que aparecieran las APIs y teconologías adecuadas para posibilitar la comunicación usuario a usuario, P2P, dentro del entorno de una aplicación web.
+Resulta evidente lo ineficiente de esta técnica: la latencia, el tiempo que tarda en llegar un mensaje de un usuario a otro, se multiplica por dos, primero de un usuario al servidor, y luego del servidor al otro usuario. Era solo cuestión de tiempo que aparecieran las API y teconologías adecuadas para posibilitar la comunicación usuario a usuario, P2P, dentro del entorno de una aplicación web.
 
 WebRTC, hecho público por Google en 2011, lleva en proceso de estandarización desde entonces, con diversos borradores disponibles y en constante cambio en la página del W3C. A pesar de tratarse de una API inestable los navegadores más modernos incorporan soporte para esta tecnología desde hace ya varios años, permitiendo así la creación de aplicaciones web que hagan uso de tecnología P2P sin necesidad de plugins, algo que cobra especial importancia en los dispositivos móviles.
 
@@ -158,7 +158,7 @@ Dicho esto, es necesario diferenciar de forma clara las funciones de ambos proto
 
 Con este fin, es necesaria la intervención de servidores auxiliares que determinen aspectos tan importantes como la dirección pública de una red que se encuentre tras uno o varios niveles NAT o los puertos que determinado firewall permite usar, ya que esta información no está al alcance directo del propio *peer*. Así, el flujo de candidatos ICE vendría dado por la siguiente figura:
 
-![Flujo ICE](images/webrtc/ICE.png)
+![Flujo de candidatos ICE](images/webrtc/ICE.png)
 
 Como se aprecia, el usuario solicita al servidor ICE el envío de un candidato que contenga la información relevante: direcciones IP, puertos disponibles, etc. Una vez obtenido el candidato, éste se envía fuera de banda al otro usuario. El circuito se completa cuando ambos usuarios toman posesión de los candidatos correspondientes, pudiendo así determinar el camino a seguir para establecer una conexión.
 
@@ -166,7 +166,7 @@ Aún queda un aspecto por resolver: ¿qué uso se le dará a esa conexión? ¿In
 
 Uno de los usuarios, el que inicia la conexión, elabora una oferta con las características de los canales de datos y flujos de audio y video que desea establecer, con información como los códecs disponibles y las restricciones de ancho de banda a imponer. Dicha oferta se envía fuera de banda - recordemos que aún no se ha establecido la conexión - al otro usuario, el cual, en base a los códecs y demás funciones de las que dispone, elabora su respuesta, incorporando en ella la información relevante de sus propios flujos de datos o audio y video, si los hubiera.
 
-![Intercambio SDP](images/webrtc/SDP.png)
+![Intercambio oferta-respuesta SDP](images/webrtc/SDP.png)
 
 Una vez que el intercambio oferta - respuesta se ha completado y, por medio de los candidatos ICE, se ha encontrado el camino adecuado para la conexión, ésta queda correctamente establecida, permitiendo el envío de datos punto a punto, desde navegadores web, sin usar un servidor como intermediario: tecnología P2P a una URL de distancia.
 
@@ -206,7 +206,7 @@ osc2.start();
 
 El diagrama de bloques correspondiente sería el siguiente:
 
-![Ejemplo Web Audio](images/web-audio.png)
+![Diagrama de bloques de la sinusoide cuadrática](images/web-audio.png)
 
 Puesto que la Web Audio API no implementa el bloque multiplicador, hemos de construirlo nosotros usando un amplificador con ganancia controlada por amplitud, la de la otra señal a multiplicar. El código de ejemplo suministrado hace sonar por la salida de audio un seno cuadrático obtenido de dos senos a frecuencia 200Hz, con lo que la señal obtenida tendrá cierto nivel de contínua y una frecuencia de 400Hz.
 
@@ -238,7 +238,7 @@ La aplicación a desarrollar persigue el establecimiento de conferencias de audi
 
 Teniendo en cuenta las restricciones de las tecnologías en uso dadas por el soporte presente en los navegadores actuales, el esquema a implementar de la conexión entre dos usuarios cualesquiera sería el siguente:
 
-![Esquema general](images/esquema.png)
+![Esquema general de la conexión entre usuarios](images/esquema.png)
 
 Tal como se observa, el visionado de la transformada de Fourier del audio enviado por el usuario remoto se realiza en base a los datos enviados por él mismo, para circundar los fallos asociados al procesamiento de audio recibido a través de WebRTC presentes en Google Chrome.
 
@@ -254,7 +254,7 @@ Una vez decidida la estructura de la conexión entre usuarios, se ha de escoger 
 
 Los problemas aparecen al introducir más usuarios. Supongamos que introducimos un tercer usuario y escogemos una topología como la que sigue:
 
-![Topología de malla](images/topo/3.png)
+![Topología de malla parcial](images/topo/3.png)
 
 En la topología escogida, *Usuario 1* ha de envíar su audio a *Usuario 2* a través de *Usuario 3*. El principal motivo de elección de esta topología es la reducción del ancho de banda utilizado: en una operación *broadcast* el audio sólo debe enviarse una vez. Sin embargo, además de disminuir el ancho de banda necesario, esta topología tiene fundamentalmente dos deficiencias: aumento de la latencia y graves problemas de seguridad.
 
@@ -393,9 +393,17 @@ En la figura anterior queda de manifiesto que los esbozos de la FFT se distribuy
 
 # Conclusiones
 
+A menudo el entorno web es menospreciado por todo tipo de ingenieros y considerado inadecuado para un gran número de tareas en las que éste incluso puede sobresalir por encima de otras alternativas. Este trabajo pone de relieve que dicho entorno no sólo es adecuado para abordar problemas anteriormente relegados al mundo de la programación nativa sino que incluso facilita su resolución, reduciendo el tiempo y la complejidad de implementación.
+
+Las técnicas y tecnologías expuestas abren las puertas de la experimentación con el procesado y la transmisión de audio dentro de un ecosistema tan conveniente que su uso ha superado al de las aplicaciones nativas desde hace años en entornos de escritorio, todo ello mediante estándares actuales ya disponibles en los navegadores más modernos y, por consiguiente, sin renunciar a la compatibilidad con plataformas móviles.
+
+El trabajo expuesto, aunque muy completo en su versión actual, podría beneficiarse de una mayor conformidad de los navegadores con los estándares relevantes, siendo posible su mejora una vez que los fallos pertinentes sean corregidos en los mismos. Así mismo, sería necesaria una mayor adaptación a entornos de alta demanda, implementando técnicas de escalado horizontal que quizás queden fuera del ámbito de este trabajo.
+
+\cleardoublepage
+
 # Bibliografía
 
-Todas las figuras presentes en el documento han sido realizadas por el autor del mismo, haciendo uso de la herramienta *Inkscape* y sin incluir elementos gráficos de terceros. Las capturas de pantalla han sido tomadas del navegador Google Chrome, canal *dev*. Las fuentes consultadas para el desarrollo de la aplicación corresponden a los respectivos estándares del W3C, la ECMA y la IETF, a saber:
+Todas las figuras presentes en el documento han sido realizadas por el autor del mismo, haciendo uso de la herramienta Inkscape y sin incluir elementos gráficos de terceros. Las capturas de pantalla han sido tomadas del navegador Google Chrome, canal *dev*. Las fuentes consultadas para el desarrollo de la aplicación corresponden a los respectivos estándares del W3C, la ECMA y la IETF, a saber:
 
 - TC39, "ECMAScript 2015 Language Specification", Ecma, ECMA-262 6th Edition / Draft April 3 2015, Abril, 2015.
 - W3C WebRTC Working Group, "WebRTC 1.0: Real-time Communication Between Browsers", W3C, WebRTC Working Draft 10 February 2015, Febrero, 2015

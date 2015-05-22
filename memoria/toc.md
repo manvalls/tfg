@@ -1,4 +1,3 @@
-\newpage
 \hypersetup{linkcolor=black}
 \tableofcontents
-\newpage
+\cleardoublepage

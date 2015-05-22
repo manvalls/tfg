@@ -1,5 +1,6 @@
 ---
-lang: spanish
-fontsize: 12pt
-geometry: margin=3cm
+lang:         spanish
+fontsize:     12pt
+geometry:     margin=3cm
+classoption:  twoside
 ---
