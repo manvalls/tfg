@@ -18,6 +18,21 @@ Para ayudar a distinguir unos usuarios de otros, así como conocer el número de
 
 Todo el trabajo se ha desarrollado en un repositorio de código abierto alojado en GitHub, dividido en bloques independientes tan simples como sea posible que interactúan entre ellos mediante interfaces. El correcto funcionamiento de cada bloque ha sido comprobado por separado de forma manual para agilizar el desarrollo, teniendo en cuenta la complejidad asociada a la implementación de pruebas automatizadas para parámetros de difícil medición, como la correcta audición de audio transmitido.
 
+## Contenido de la memoria
+
+El documento contiene:
+
+- El presente capítulo, una **introducción** al trabajo realizado que pretende dar una visión preliminar global del mismo.
+- Un capítulo dedicado a exponer las diferentes **tecnologías** escogidas para la realización del trabajo.
+- Un apartado refrente a los detalles de la **implementación**, incluyendo:
+    - Un **esquema de funcionamiento** general orientativo del camino escogido para abordar el problema.
+    - Detalles sobre el mecanismo de **obtención y distorsión del audio** asociado a cada usuario.
+    - Información sobre el manejo de la **transformada de Fourier** del audio resultante.
+    - Un resumen del método empleado para el **envío de audio e información de la FFT** obtenida.
+    - Una descripción de la **interfaz** de usuario implementada.
+- Las **conclusiones** y líneas futuras relativas al resultado obtenido.
+- La **bibliografía** consultada.
+
 # Tecnologías
 
 Con el fin de realizar el proyecto propuesto se ha decido emplear el siguiente conjunto de tecnologías, primando estándares y herramientas abiertas frente a alternativas propietarias:
@@ -215,7 +230,7 @@ Soluciones síncronas como PHP solventan este problema lanzando una hebra para c
 
 Como resultado de este cambio de paradigma se obtienen mejoras sustanciales en capacidad de usuarios y tiempo de respuesta, además de código reusable al compartir el mismo lenguaje de programación tanto en el cliente como en el servidor. En los últimos años se ha producido un aumento expectacular de la popularidad de Node.js, creando un ecosistema extenso y variado de librerías y recursos a través de su gestor de paquetes oficial, npm (*node package manager*).
 
-# Desarrollo de la aplicación
+# Implementación
 
 ## Esquema de funcionamiento
 
