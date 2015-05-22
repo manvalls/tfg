@@ -333,7 +333,7 @@ La información de la FFT se puede obtener en dos formatos: flotantes o enteros 
 
 Para las conexiones se ha hecho uso de una librería de creación propia denominada `iku-hub`, que interconecta usuarios usando uno o varios servidores como intermediarios a través del concepto de salas. Dicha librería está diseñada con el objetivo de ser altamente extensible, de forma que forzar el uso de WebRTC (P2P) para las conexiones entre usuarios resulta una tarea sencilla, gracias a los diversos *plugins* incluidos por defecto.
 
-El código relevante a ejecutar por node.js en el servidor es muy sencillo:
+Utilizaremos como canal de comunicación con el servidor la ya indicada tecnología WebSocket. El código relevante a ejecutar por node.js en el mismo es muy sencillo:
 
 ```javascript
 function* onClient(client,c,rooms){
