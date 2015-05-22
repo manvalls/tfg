@@ -2,11 +2,21 @@
 
 Cuando el término "telecomunicación" fue ideado, a principios del siglo XX, la telefonía ya era una realidad. No en vano constituye uno de los ejemplos clásicos más recurrentes de telecomunicación. Años después, sin embargo, ha pasado a ocupar tan solo una pequeña fracción del tiempo que empleamos a diario en *telecomunicarnos*, eclipsada tras la aparición de Internet y el sinfín de posibilidades que trajo consigo.
 
-Tal vez sea el momento de cambiar de ejemplo. Difícil sería encontrar mejor sustituto que la *World Wide Web*: muchos empezamos a *navegarla* antes de nuestra primera cerveza, y no pocos incluso la consideran sinónimo de Internet. Aún hoy, la idea de código recibido e interpretado al momento, con información autocontenida acerca de las normas a seguir para el mantenimiento de la comunicación, sigue siendo sujeto de fascinación.
+Tal vez sea el momento de cambiar de ejemplo. Difícil sería encontrar mejor sustituto que la *World Wide Web*: muchos empezamos a *navegarla* antes de alcanzar la mayoría de edad, y no pocos incluso la consideran sinónimo de Internet. Aún hoy, la idea de código recibido e interpretado al momento, con información autocontenida acerca de las normas a seguir para el mantenimiento de la comunicación, sigue siendo sujeto de fascinación.
 
-Mucho ha cambiado en la corta vida de la web, y hoy día las cosas que ese trozo de código recibido desde un servidor remoto no puede hacer son pocas y muy específicas. La comunicación acústica no es una de ellas. En este trabajo el lector observará la fusión del mundo clásico con el moderno, contemplando como un programa completo es transmitido a distancia hasta su terminal y comienza a ejecutarse en menos de un segundo para establecer una multiconferencia punto a punto con el resto de usuarios de la aplicación.
+Mucho ha cambiado en la corta vida de la web, y hoy día las cosas que ese trozo de código recibido desde un servidor remoto no puede hacer son pocas y muy específicas. La comunicación acústica no es una de ellas. En este trabajo el lector observará la fusión del mundo clásico con el moderno, contemplando cómo un programa completo es transmitido a distancia hasta su terminal y comienza a ejecutarse en menos de un segundo para establecer una multiconferencia punto a punto con el resto de usuarios de la aplicación.
 
-Por si esto no bastara, en una era marcada por la profunda amenaza a la privacidad del usuario, el programa empleará conceptos usados en modulaciones analógicas para distorsionar digitalmente la voz de los participantes en la conferencia, si así lo consideran oportuno. De nuevo, lo clásico y lo moderno confluyen para brindar una experiencia de usuario única, todo ello con la comodidad de la web.
+Por si esto no bastara, en una era marcada por la profunda amenaza a la privacidad del usuario, el programa empleará conceptos usados en modulaciones analógicas para distorsionar digitalmente la voz de los participantes en la conferencia, si así lo consideran oportuno. De nuevo, lo clásico y lo moderno confluyen para brindar una experiencia de usuario única, todo ello dentro de la comodidad de la web.
+
+## Objetivos
+
+El objetivo principal del trabajo es el de construir una aplicación web que posibilite el establecimiento de una comunicación bidireccional de voz entre dos o más usuarios, a la manera de una multiconferencia. De forma complementaria, se añadirá la opción de distorsionar el audio propio con la intención de mejorar el anonimato del usuario.
+
+Para ayudar a distinguir unos usuarios de otros, así como conocer el número de usuarios presentes en una conferencia, se identificará a cada interlocutor mediante un esbozo de la transformada de Fourier de su flujo de audio, coloreado según las preferencias de cada usuario.
+
+## Metodología
+
+Todo el trabajo se ha desarrollado en un repositorio de código abierto alojado en GitHub, dividido en bloques independientes tan simples como sea posible que interactúan entre ellos mediante interfaces. El correcto funcionamiento de cada bloque ha sido comprobado por separado de forma manual para agilizar el desarrollo, teniendo en cuenta la complejidad asociada a la implementación de pruebas automatizadas para parámetros de difícil medición, como la correcta audición de audio transmitido.
 
 # Tecnologías
 
@@ -205,7 +215,7 @@ Soluciones síncronas como PHP solventan este problema lanzando una hebra para c
 
 Como resultado de este cambio de paradigma se obtienen mejoras sustanciales en capacidad de usuarios y tiempo de respuesta, además de código reusable al compartir el mismo lenguaje de programación tanto en el cliente como en el servidor. En los últimos años se ha producido un aumento expectacular de la popularidad de Node.js, creando un ecosistema extenso y variado de librerías y recursos a través de su gestor de paquetes oficial, npm (*node package manager*).
 
-# Desarrollo
+# Desarrollo de la aplicación
 
 ## Esquema de funcionamiento
 
@@ -387,5 +397,7 @@ Se han consultado así mismo los siguientes informes acerca de fallos en navegad
 - Bug 1081819 - WebAudio data isn't transmitting over established peerConnection ( bugzilla.mozilla.org/show_bug.cgi?id=1081819 )
 - Issue 121673:	Hook up Web Audio API with WebRTC for audio processing ( code.google.com/p/chromium/issues/detail?id=121673 )
 
-La aplicación web desarrollada es el fruto de varios años de dedicación al desarrollo web de manera independiente. Las fuentes consultadas a lo largo de ese tiempo no están reflejadas en este documento.
+La aplicación web desarrollada es el fruto de varios años de dedicación al desarrollo web de manera independiente. Las fuentes consultadas a lo largo de ese tiempo no están reflejadas en este documento. El trabajo en su totalidad puede encontrarse en el siguiente repositorio de GitHub:
+
+- github.com/manvalls/tfg
 

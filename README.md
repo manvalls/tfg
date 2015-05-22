@@ -4,6 +4,13 @@
 
 Ver [memoria/memoria.md](memoria/memoria.md "Memoria del tfg")
 
+### Construcción del archivo pdf
+
+```
+cd memoria
+make
+```
+
 ## Ejecución del servidor
 
 ```
