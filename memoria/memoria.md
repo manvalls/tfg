@@ -391,6 +391,8 @@ En la figura anterior queda de manifiesto que los esbozos de la FFT se distribuy
 
 ![Más de dos usuarios](images/interfaz/multi.png)
 
+\clearpage
+
 # Conclusiones
 
 A menudo el entorno web es menospreciado por todo tipo de ingenieros y considerado inadecuado para un gran número de tareas en las que éste incluso puede sobresalir por encima de otras alternativas. Este trabajo pone de relieve que dicho entorno no sólo es adecuado para abordar problemas anteriormente relegados al mundo de la programación nativa sino que incluso facilita su resolución, reduciendo el tiempo y la complejidad de implementación.
