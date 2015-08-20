@@ -5,23 +5,23 @@
   "main": "main.js",
   "bin": "./bin/runner.sh",
   "dependencies": {
-    "wapp": "",
-    "iku-hub": "",
-    "i-peer": "",
-    "i-pm": "",
-    "y-walk": "",
-    "u-help": "",
-    "forever": ""
+    "wapp": "^11",
+    "iku-hub": "^6",
+    "i-peer": "^2",
+    "i-pm": "^2",
+    "y-walk": "^9",
+    "u-help": "^1",
+    "forever": "^1"
   },
   "devDependencies": {
-    "u-elem": "",
-    "u-css": "",
-    "u-proto": "",
-    "y-callback": "",
-    "y-resolver": "",
-    "y-emitter": "",
-    "y-timers": "",
-    "u-su": ""
+    "u-elem": "^1",
+    "u-css": "^1",
+    "u-proto": "^3",
+    "y-callback": "^1",
+    "y-resolver": "^3",
+    "y-emitter": "^6",
+    "y-timers": "^1",
+    "u-su": "^1"
   },
   "repository": {
     "type": "git",
