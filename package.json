@@ -11,7 +11,7 @@
     "i-pm": "^2",
     "y-walk": "^9",
     "u-help": "^1",
-    "forever": "^1"
+    "forever": ""
   },
   "devDependencies": {
     "u-elem": "^1",
