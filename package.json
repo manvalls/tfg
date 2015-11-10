@@ -16,7 +16,7 @@
   "devDependencies": {
     "u-elem": "^1",
     "u-css": "^1",
-    "u-proto": "^2",
+    "u-proto": "^3",
     "y-callback": "^1",
     "y-resolver": "^3",
     "y-emitter": "^6",
