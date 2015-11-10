@@ -11,12 +11,12 @@
     "i-pm": "^2",
     "y-walk": "^9",
     "u-help": "^1",
-    "forever": ""
+    "forever": "^0"
   },
   "devDependencies": {
     "u-elem": "^1",
     "u-css": "^1",
-    "u-proto": "^3",
+    "u-proto": "^2",
     "y-callback": "^1",
     "y-resolver": "^3",
     "y-emitter": "^6",
